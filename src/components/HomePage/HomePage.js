@@ -16,6 +16,7 @@ class HomePage extends Component {
       <div>
         <h2>{this.state.heading}</h2>
       </div>
+
     );
   }
 }
