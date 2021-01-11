@@ -16,9 +16,10 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
+// import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import HomePage from '../HomePage/HomePage'
 
 import './App.css';
 
@@ -67,30 +68,29 @@ class App extends Component {
             be taken to the component and path supplied. */}
             <ProtectedRoute
               // with authRedirect:
-              // - if logged in, redirects to "/user"
+              // - if logged in, redirects to "/home"
               // - else shows LoginPage at /login
               exact
               path="/login"
               component={LoginPage}
-              authRedirect="/user"
+              authRedirect="/home"
             />
             <ProtectedRoute
               // with authRedirect:
-              // - if logged in, redirects to "/user"
+              // - if logged in, redirects to "/home"
               // - else shows RegisterPage at "/registration"
               exact
               path="/registration"
               component={RegisterPage}
-              authRedirect="/user"
+              authRedirect="/home"
             />
             <ProtectedRoute
               // with authRedirect:
-              // - if logged in, redirects to "/user"
-              // - else shows LandingPage at "/home"
+              // - if logged in, redirects to "/home"
+              // - else shows LoginPage at "/home"
               exact
               path="/home"
-              component={LandingPage}
-              authRedirect="/user"
+              component={HomePage}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

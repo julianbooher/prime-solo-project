@@ -12,14 +12,14 @@ const Nav = (props) => {
   };
 
   if (props.store.user.id != null) {
-    loginLinkData.path = '/user';
+    loginLinkData.path = '/home';
     loginLinkData.text = 'Home';
   }
 
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+        <h2 className="nav-title">Match Thread</h2>
       </Link>
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
@@ -33,6 +33,9 @@ const Nav = (props) => {
           <>
             <Link className="nav-link" to="/info">
               Info Page
+            </Link>
+            <Link className="nav-link" to="/user">
+              User Page
             </Link>
             <LogOutButton className="nav-link" />
           </>
