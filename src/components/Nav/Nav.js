@@ -12,6 +12,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuIcon from "@material-ui/icons/Menu";
 
 
 
@@ -32,6 +35,29 @@ const styles = {
 };
 
 class Nav extends Component {
+
+  state = {
+    width: 0,
+    anchorEl: null,
+  }
+
+  handleMenuClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  componentDidMount() {
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth });
+  }
   
   goSomewhere = (destination) => {
     this.props.history.push(`/${destination}`)
@@ -40,14 +66,39 @@ class Nav extends Component {
   render(){
 
     const {classes} = this.props;
+    const { anchorEl } = this.state;
 
     return (
       <div className={classes.root}>
+        
         <AppBar position="static">
           <Toolbar>
             <Button color="inherit" onClick={event => this.goSomewhere('home')}>
               <h2>Match Thread</h2>
             </Button>
+            {this.state.width < 800 ?
+            <>
+              <Button
+              aria-owns={anchorEl ? 'simple-menu' : undefined}
+              aria-haspopup="true"
+              onClick={this.handleMenuClick}
+              >
+              <MenuIcon />
+              </Button>
+              <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={this.handleClose}
+              >
+              <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+              <MenuItem onClick={this.handleClose}>My account</MenuItem>
+              <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+              </Menu>
+              </>
+              :
+
+              <>
               {this.props.store.user.id ? 
                 <>
                 <Button color="inherit" onClick={event => this.goSomewhere('home')}> Home</Button>
@@ -64,17 +115,16 @@ class Nav extends Component {
                 <LogOutButton />
                 </>
                  :
-                <Button color="inherit" onClick={this.goToLogin}>Login/Register</Button>
-              }
-              
-              {/* Always show this link since the about page is not protected */}
-              <Button color="inherit" to="/about" component={Link}>
-                About
-              </Button>
+                 <Button color="inherit" onClick={event => this.goSomewhere('login')}>Login/Register</Button>
+                }
+                </>
+            
+            
+            }
           </Toolbar>
         </AppBar>
-        <br></br>
-        {JSON.stringify(this.props)}
+        {JSON.stringify(this.state.width)}
+
       </div>
     );
   };
