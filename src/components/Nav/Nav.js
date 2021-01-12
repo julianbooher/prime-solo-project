@@ -127,7 +127,7 @@ class Nav extends Component {
                 }
           </Toolbar>
         </AppBar>
-        {JSON.stringify(this.state.width)}
+        {/* {JSON.stringify(this.state.width)} */}
 
       </div>
     );

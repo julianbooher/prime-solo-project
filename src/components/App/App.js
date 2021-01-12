@@ -15,8 +15,8 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import Fixtures from '../Fixtures/Fixtures'
+// import InfoPage from '../InfoPage/InfoPage';
+import FixturesPage from '../FixturesPage/FixturesPage'
 // import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -61,7 +61,7 @@ class App extends Component {
               // logged in shows InfoPage else shows LoginPage
               exact
               path="/fixtures"
-              component={Fixtures}
+              component={FixturesPage}
             />
             
 

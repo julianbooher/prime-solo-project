@@ -1,0 +1,13 @@
+thead, tbody{
+    display: block;
+}
+
+tbody{
+    height: 300px;
+    overflow-y: auto;   
+    overflow-x: hidden;
+}
+
+.MuiTablePagination-spacer{
+    width: 50%;
+}

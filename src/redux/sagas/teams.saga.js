@@ -2,21 +2,16 @@ import axios from 'axios';
 import {put, takeLatest } from 'redux-saga/effects';
 
 // GET ROUTE
-function* fetchFixtures(action) {
+function* fetchTeams() {
     try {
       const config = {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       };
-      console.log('action payload', action.payload)
-      let response;
-      if (action.payload > 0){
-        response = yield axios.get(`api/fixtures/${action.payload}`, config);
-      } else {
-        response = yield axios.get('api/fixtures', config);
-      }
   
-      yield put({ type: 'SET_FIXTURES', payload: response.data });
+      const response = yield axios.get('api/teams', config);
+  
+      yield put({ type: 'SET_TEAMS', payload: response.data });
     } catch (error) {
       console.log('Shelf get request failed', error);
     }
@@ -74,11 +69,11 @@ function* fetchFixtures(action) {
   //   }
   // }
   
-  function* fixturesSaga() {
-    yield takeLatest('FETCH_FIXTURES', fetchFixtures);
+  function* teamsSaga() {
+    yield takeLatest('FETCH_TEAMS', fetchTeams);
     // yield takeLatest('ADD_ITEM', addItem);
     // yield takeLatest('DELETE_ITEM', deleteItem);
     // yield takeLatest('EDIT_ITEM', editItem);
   }
   
-  export default fixturesSaga;
+  export default teamsSaga;
