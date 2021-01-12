@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import FixtureTableRow from '../FixtureTableRow/FixtureTableRow'
+
+// css
+import './FixtureTable.css'
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -26,7 +30,7 @@ const styles = theme => ({
 });
 
 
-class Fixtures extends Component {
+class FixtureTable extends Component {
   state = {
     page: 0,
     rowsPerPage: 5,
@@ -39,7 +43,7 @@ class Fixtures extends Component {
   componentDidMount = () => {
     this.props.dispatch({type: 'FETCH_FIXTURES'});
   }
-
+3
   handleChangeRowsPerPage = event => {
     this.setState({ rowsPerPage: event.target.value });
   };
@@ -51,7 +55,6 @@ class Fixtures extends Component {
 
     return (
       <div>
-        <h1>Fixtures</h1>
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
@@ -63,12 +66,7 @@ class Fixtures extends Component {
           </TableHead>
           <TableBody>
             {this.props.store.fixtures.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(fixture=> (
-              <TableRow key={fixture.id}>
-                <TableCell>{fixture.date}</TableCell>
-                <TableCell>{fixture.home_team_name}</TableCell>
-                <TableCell>{fixture.away_team_name}</TableCell>
-                <TableCell><button>Rate</button></TableCell>
-              </TableRow>
+              <FixtureTableRow key={fixture.id} fixture={fixture}/>
             ))}
           </TableBody>
         </Table>
@@ -94,4 +92,4 @@ class Fixtures extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(withStyles(styles)(Fixtures));
+export default connect(mapStoreToProps)(withStyles(styles)(FixtureTable));
