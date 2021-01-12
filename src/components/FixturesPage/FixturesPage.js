@@ -38,7 +38,7 @@ class FixturePage extends Component {
     this.setState({
     teamSelected: event.target.value
     })
-    // this.props.dispatch({type: 'FETCH_FIXTURES', payload: this.state.teamSelected})
+    this.props.dispatch({type: 'FETCH_FIXTURES', payload: event.target.value})
 
 }
 

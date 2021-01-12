@@ -8,8 +8,13 @@ function* fetchFixtures(action) {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       };
-      
-      const response = yield axios.get('api/fixtures', config);
+      console.log('action payload', action.payload)
+      let response;
+      if (action.payload > 0){
+        response = yield axios.get(`api/fixtures/${action.payload}`, config);
+      } else {
+        response = yield axios.get('api/fixtures', config);
+      }
   
       yield put({ type: 'SET_FIXTURES', payload: response.data });
     } catch (error) {
