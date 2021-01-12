@@ -34,6 +34,8 @@ const styles = {
   },
 };
 
+
+
 class Nav extends Component {
 
   state = {
@@ -43,10 +45,6 @@ class Nav extends Component {
 
   handleMenuClick = event => {
     this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
   };
 
   componentDidMount() {
@@ -61,7 +59,12 @@ class Nav extends Component {
   
   goSomewhere = (destination) => {
     this.props.history.push(`/${destination}`)
+    if (this.state.anchorEl !== null){
+      this.setState({ anchorEl: null })
+    }
   }
+
+  
 
   render(){
 
@@ -76,51 +79,49 @@ class Nav extends Component {
             <Button color="inherit" onClick={event => this.goSomewhere('home')}>
               <h2>Match Thread</h2>
             </Button>
-            {this.state.width < 800 ?
-            <>
-              <Button
-              aria-owns={anchorEl ? 'simple-menu' : undefined}
-              aria-haspopup="true"
-              onClick={this.handleMenuClick}
-              >
-              <MenuIcon />
-              </Button>
-              <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={this.handleClose}
-              >
-              <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-              <MenuItem onClick={this.handleClose}>My account</MenuItem>
-              <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-              </Menu>
-              </>
-              :
-
-              <>
               {this.props.store.user.id ? 
                 <>
-                <Button color="inherit" onClick={event => this.goSomewhere('home')}> Home</Button>
-                <Button color="inherit" onClick={event => this.goSomewhere('fixtures')}>
-                    Fixtures
-                </Button>
-                <Button color="inherit" onClick={event => this.goSomewhere('teams')}>
-                    Teams
-                </Button>
-                <Button color="inherit" onClick={event => this.goSomewhere('user')}>
-                    User
-                </Button>
-
-                <LogOutButton />
-                </>
+                {this.state.width < 800 ? 
+                  <>
+                    <Button
+                    aria-owns={anchorEl ? 'simple-menu' : undefined}
+                    aria-haspopup="true"
+                    onClick={this.handleMenuClick}
+                    >
+                    <MenuIcon />
+                    </Button>
+                    <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={this.handleClose}
+                    >
+                    <MenuItem onClick={event => this.goSomewhere('home')}>Home</MenuItem>
+                    <MenuItem onClick={event => this.goSomewhere('fixtures')}>Fixtures</MenuItem>
+                    <MenuItem onClick={event => this.goSomewhere('teams')}>Teams</MenuItem>
+                    <MenuItem onClick={event => this.goSomewhere('user')}>User</MenuItem>
+                    <MenuItem onClick={() => this.props.dispatch({ type: 'LOGOUT' })}>LogOut</MenuItem>
+                    </Menu>
+                  </>
+                :
+                  <>
+                    <Button color="inherit" onClick={event => this.goSomewhere('home')}> Home</Button>
+                    <Button color="inherit" onClick={event => this.goSomewhere('fixtures')}>
+                        Fixtures
+                    </Button>
+                    <Button color="inherit" onClick={event => this.goSomewhere('teams')}>
+                        Teams
+                    </Button>
+                    <Button color="inherit" onClick={event => this.goSomewhere('user')}>
+                        User
+                    </Button>
+                    <LogOutButton />
+                  </>
+              }
+              </>
                  :
                  <Button color="inherit" onClick={event => this.goSomewhere('login')}>Login/Register</Button>
                 }
-                </>
-            
-            
-            }
           </Toolbar>
         </AppBar>
         {JSON.stringify(this.state.width)}
