@@ -7,7 +7,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * GET route template
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
-  console.log('req.user in shelf.get')
+  console.log('req.user in teams.get')
   const queryText = `SELECT id, name FROM team ORDER BY name ASC;`
   pool.query(queryText)
   .then((results) => {
@@ -19,6 +19,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   })
 });
 
+
+// GET route with parameters
 /**
  * POST route template
  */

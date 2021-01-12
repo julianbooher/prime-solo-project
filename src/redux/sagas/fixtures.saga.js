@@ -2,13 +2,13 @@ import axios from 'axios';
 import {put, takeLatest } from 'redux-saga/effects';
 
 // GET ROUTE
-function* fetchFixtures() {
+function* fetchFixtures(action) {
     try {
       const config = {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       };
-  
+      
       const response = yield axios.get('api/fixtures', config);
   
       yield put({ type: 'SET_FIXTURES', payload: response.data });

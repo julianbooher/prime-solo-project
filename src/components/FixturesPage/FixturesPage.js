@@ -34,22 +34,25 @@ class FixturePage extends Component {
     this.props.dispatch({type: 'FETCH_TEAMS'})
   }
 
-  handleChangeFor = (event, inputName) => {
+  handleChangeFor = (event) => {
     this.setState({
-    [inputName]: event.target.value
+    teamSelected: event.target.value
     })
+    // this.props.dispatch({type: 'FETCH_FIXTURES', payload: this.state.teamSelected})
+
 }
 
   render() {
     const {classes } = this.props
     return (
       <div className={classes.root}>
+        {JSON.stringify(this.state)}
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="team-native-simple">Team</InputLabel>
           <Select
             native
             value={this.state.teamSelected}
-            onChange={(event) => this.handleChangeFor(event, 'teamSelected')}
+            onChange={(event) => this.handleChangeFor(event)}
             inputProps={{
               name: 'team_id',
               id: 'team-native-simple',
@@ -58,7 +61,7 @@ class FixturePage extends Component {
             <option value={0}>All</option>
             {this.props.store.teams.map((team) => {
               return(
-                <option value={team.id}>{team.name}</option>
+                <option key={team.id} value={team.id}>{team.name}</option>
               )
             })}
           </Select>
