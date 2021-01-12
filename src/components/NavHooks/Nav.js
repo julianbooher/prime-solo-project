@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { withRouter } from "react-router";
@@ -10,7 +10,7 @@ import './Nav.css';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-// import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -82,9 +82,7 @@ class Nav extends Component {
             <Button color="inherit" onClick={event => this.goSomewhere('home')}>
               <h2>Match Thread</h2>
             </Button>
-              {this.props.store.user.id ? 
-                <>
-                {this.state.width < 800 ? 
+                {this.state.width < 800 && this.props.store.user.id && 
                   <>
                     <Button
                     aria-owns={anchorEl ? 'simple-menu' : undefined}
@@ -106,7 +104,8 @@ class Nav extends Component {
                     <MenuItem onClick={() => this.props.dispatch({ type: 'LOGOUT' })}>LogOut</MenuItem>
                     </Menu>
                   </>
-                :
+                }
+                {this.props.store.user.id ?
                   <>
                     <Button color="inherit" onClick={event => this.goSomewhere('home')}> Home</Button>
                     <Button color="inherit" onClick={event => this.goSomewhere('fixtures')}>
@@ -120,11 +119,10 @@ class Nav extends Component {
                     </Button>
                     <LogOutButton />
                   </>
+                :
+                <Button color="inherit" onClick={event => this.goSomewhere('login')}>Login/Register</Button>
+          
               }
-              </>
-                 :
-                 <Button color="inherit" onClick={event => this.goSomewhere('login')}>Login/Register</Button>
-                }
           </Toolbar>
         </AppBar>
         {JSON.stringify(this.state.width)}
