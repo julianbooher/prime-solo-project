@@ -6,6 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import {Link} from 'react-router-dom';
 
 // Material UI styles
 const styles = theme => ({
@@ -25,14 +26,14 @@ const styles = theme => ({
 class FixtureTableRow extends Component {
 
   render() {
-    const { classes, fixture } = this.props;
+    const { fixture } = this.props;
     return (
       <>
       <TableRow key={fixture.id}>
         <TableCell>{fixture.date}</TableCell>
         <TableCell>{fixture.home_team_name}</TableCell>
         <TableCell>{fixture.away_team_name}</TableCell>
-        <TableCell><button>Rate</button></TableCell>
+        <TableCell><Link to={`/fixture/${fixture.id}`}>Discuss</Link></TableCell>
       </TableRow>
       </>
             

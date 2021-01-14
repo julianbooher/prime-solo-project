@@ -6,11 +6,9 @@ import FixtureTable from '../FixtureTable/FixtureTable'
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
 
 const styles = theme => ({
   formControl: {
@@ -23,7 +21,7 @@ const styles = theme => ({
 });
 
 
-class FixturePage extends Component {
+class FixturesPage extends Component {
 
   state = {
     teamSelected: 0
@@ -79,4 +77,4 @@ class FixturePage extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(withStyles(styles)(FixturePage));
+export default connect(mapStoreToProps)(withStyles(styles)(FixturesPage));

@@ -17,10 +17,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                       JOIN team_fixture ON team.id = team_fixture.team_id 
                       WHERE team_fixture.home=false AND fixture.id=fixture_id) AS away_team_name
                     FROM fixture
-                    JOIN team_fixture ON fixture.id = team_fixture.fixture_id
-                    JOIN team on team.id = team_fixture.team_id
                     GROUP BY fixture.id
-                    ORDER BY date DESC
                     ;`
   pool.query(queryText)
   .then((results) => {
