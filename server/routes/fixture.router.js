@@ -21,8 +21,39 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   })
 });
 
-// GET ratings with params for specific fixture ratings.
+// GET fixture info with params for specific fixture.
 router.get('/:id', rejectUnauthenticated, (req, res) => {
+  console.log('req.user in fixture.get')
+  const queryText = `
+                    SELECT fixture.date,
+                      (SELECT team.name FROM team
+                       JOIN team_fixture ON team.id = team_fixture.team_id 
+                       WHERE team_fixture.home=true AND fixture.id=fixture_id) AS home_team_name,
+                      (SELECT team.id FROM team
+                       JOIN team_fixture ON team.id = team_fixture.team_id 
+                       WHERE team_fixture.home=true AND fixture.id=fixture_id) AS home_team_id,
+                      (SELECT team.name FROM team
+                       JOIN team_fixture ON team.id = team_fixture.team_id 
+                       WHERE team_fixture.home=false AND fixture.id=fixture_id) AS away_team_name,
+                      (SELECT team.id FROM team
+                       JOIN team_fixture ON team.id = team_fixture.team_id 
+                       WHERE team_fixture.home=false AND fixture.id=fixture_id) AS away_team_id
+                    FROM fixture
+                    WHERE fixture.id = $1
+                    GROUP BY fixture.id
+                    ;`
+  pool.query(queryText, [req.params.id])
+  .then((results) => {
+    res.send(results.rows);
+  })
+  .catch((error) => {
+    console.log('Error in fixtures.router.js GET route', error);
+    res.sendStatus(500);
+  })
+});
+
+// GET ratings with params for specific fixture ratings.
+router.get('/comments/:id', rejectUnauthenticated, (req, res) => {
   console.log('req.user in fixture.get')
   const queryText = `
                     SELECT comment, player.name AS potm_name, player_of_the_match AS potm_id, "user".username,
