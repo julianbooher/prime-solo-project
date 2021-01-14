@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // Material UI
@@ -32,7 +33,7 @@ class FixtureTableRow extends Component {
         <TableCell>{fixture.date}</TableCell>
         <TableCell>{fixture.home_team_name}</TableCell>
         <TableCell>{fixture.away_team_name}</TableCell>
-        <TableCell><button>Rate</button></TableCell>
+        <TableCell><Link to={`/fixture/${fixture.id}`}>Rate</Link></TableCell>
       </TableRow>
       </>
             
