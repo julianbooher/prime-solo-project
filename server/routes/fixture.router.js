@@ -39,10 +39,10 @@ router.get('/comments/:id', rejectUnauthenticated, (req, res) => {
   console.log('req.user in fixture.get')
   const queryText = `
                     SELECT comment, player.name AS potm_name, player_of_the_match AS potm_id, "user".username,
-                    (SELECT ((atk_rating + df_rating) * 1.0 / 2) AS home_team_rating
+                    (SELECT ((atk_rating + df_rating) / 2) AS home_team_rating
                     FROM rating_data WHERE rating.id = rating_data.rating_id 
                     AND rating_data.home = true),
-                    (SELECT ((atk_rating + df_rating) * 1.0 / 2) AS away_team_rating
+                    (SELECT ((atk_rating + df_rating) / 2) AS away_team_rating
                     FROM rating_data WHERE rating.id = rating_data.rating_id 
                     AND rating_data.home = false)
                     FROM rating

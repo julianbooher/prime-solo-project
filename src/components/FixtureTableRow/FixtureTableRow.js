@@ -26,7 +26,7 @@ const styles = theme => ({
 class FixtureTableRow extends Component {
 
   render() {
-    const { classes, fixture } = this.props;
+    const { fixture } = this.props;
     return (
       <>
       <TableRow key={fixture.id}>

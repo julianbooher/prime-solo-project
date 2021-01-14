@@ -1,4 +1,9 @@
-const fixtureReducer = (state = {}, action) => {
+const fixtureReducer = (
+    state = {
+        info: {},
+        comments: []
+    }, 
+    action) => {
     switch (action.type) {
         case 'SET_FIXTURE_INFO':
             return {...state, info: action.payload};

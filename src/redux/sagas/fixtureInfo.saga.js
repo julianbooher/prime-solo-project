@@ -10,7 +10,7 @@ function* fetchFixtureInfo(action) {
       };
       console.log('action payload', action.payload)
       const response = yield axios.get(`api/fixture/info/${action.payload}`, config);
-      yield put({ type: 'SET_FIXTURE_INFO', payload: response.data });
+      yield put({ type: 'SET_FIXTURE_INFO', payload: response.data[0] });
     } catch (error) {
       console.log('api/fixture/info get request failed', error);
     }
