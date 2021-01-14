@@ -20,17 +20,20 @@ const styles = theme => ({
 class FixturePage extends Component {
 
   componentDidMount = () => {
-    // this.props.dispatch({type: 'FETCH_FIXTURES'});
-    // this.props.dispatch({type: 'FETCH_TEAMS'})
+    console.log('in componentDidMount', this.props.match.params.id)
+    this.props.dispatch({type: 'FETCH_FIXTURE_INFO', payload: this.props.match.params.id});
+    this.props.dispatch({type: 'FETCH_FIXTURE_COMMENTS', payload: this.props.match.params.id});
   }
 
 
 
   render() {
     const {classes } = this.props
+    const { fixtureInfo } = this.props.store
     return (
       <div>
         <h1>Fixture Page</h1>
+        {JSON.stringify(fixtureInfo)}
         {this.props.match.params.id}
       </div>
 

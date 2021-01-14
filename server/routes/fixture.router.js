@@ -3,26 +3,8 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET all ratings, ordered by date.
- */
-// router.get('/', rejectUnauthenticated, (req, res) => {
-//   console.log('req.user in shelf.get')
-//   const queryText = `
-                    
-//                     ;`
-//   pool.query(queryText)
-//   .then((results) => {
-//     res.send(results.rows);
-//   })
-//   .catch((error) => {
-//     console.log('Error in fixtures.router.js GET route', error);
-//     res.sendStatus(500);
-//   })
-// });
-
 // GET fixture info with params for specific fixture.
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/info/:id', rejectUnauthenticated, (req, res) => {
   console.log('req.user in fixture.get')
   const queryText = `
                     SELECT fixture.date,
