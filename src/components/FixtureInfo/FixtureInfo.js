@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './FixtureInfo.css'
 import WordBubble from '../WordBubble/WordBubble'
+import RatingForm from '../RatingForm/RatingForm'
 
 
 // Material UI
@@ -27,26 +28,25 @@ class FixturePage extends Component {
 
 
   render() {
-    const {classes } = this.props
+    // const {classes } = this.props
     const { info } = this.props.store.fixtureInfo
     const { comments } = this.props.store.fixtureInfo
-    console.log('in render comments', comments);
     return (
       <div>
         {JSON.stringify(this.props.store)}
         {/* {this.props.match.params.id} */}
         {info !== null &&
-          <>
-          <h1><img src={`https://media.api-sports.io/football/teams/${info.home_team_id}.png`}/>{info.home_team_name} vs. {info.away_team_name}<img src={`https://media.api-sports.io/football/teams/${info.away_team_id}.png`}/></h1>
-          <h2>{info.date}</h2>
-          </>
+          <div className="fixture-header">
+            <h1><img alt={info.home_team_name} src={`https://media.api-sports.io/football/teams/${info.home_team_id}.png`}/>{info.home_team_name} vs. {info.away_team_name}<img alt={info.away_team_name} src={`https://media.api-sports.io/football/teams/${info.away_team_id}.png`}/></h1>
+            <h2>{info.date}</h2>
+          </div>
         }
         <Grid 
             container 
             spacing={0}
           >
             <Grid item xs={12} sm={7}>
-              <h1>Grid Test</h1>
+              <RatingForm info={info} />
             </Grid>
             <Grid item xs={12} sm={5}>
               {comments !== undefined &&

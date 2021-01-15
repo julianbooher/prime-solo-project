@@ -29,7 +29,7 @@ class WordBubbles extends Component {
           <Grid container spacing={1}>
               <Grid item xs={12} sm={5} container spacing={2}>
                 <Grid item xs>
-                  <p className="username">Username</p>
+                  <p className="username">{commentInfo.username}</p>
                   <p className="rating home-team">{info.home_team_name}<br></br> {commentInfo.home_team_rating}/100</p>
                   <p className="rating away-team">{info.away_team_name}<br></br> {commentInfo.away_team_rating}/100</p>
                   <p className="rating potm">POTM: <br></br>{commentInfo.potm_name}</p>
