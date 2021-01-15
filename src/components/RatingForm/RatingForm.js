@@ -9,6 +9,8 @@ import './RatingForm.css'
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 
 
 const styles = theme => ({
@@ -29,11 +31,14 @@ const styles = theme => ({
   menu: {
     width: 50,
   },
+  button: {
+    margin: theme.spacing(1),
+  },
 });
 
 class RatingForm extends Component {
   state = {
-    home_atk_rating: 50,
+    home_atk_rating: 0,
     home_df_rating: 0,
     away_atk_rating: 0,
     away_df_rating: 0,
@@ -44,6 +49,10 @@ class RatingForm extends Component {
     this.setState({  
         [inputType]: event.target.value
     })
+  }
+
+  handleSubmit = () => {
+    console.log('inside handleSubmit', {...this.state, ...this.props.store.fixtureInfo.info})
   }
 
   render() {
@@ -131,7 +140,7 @@ class RatingForm extends Component {
           </Grid>
           <TextField
             id="outlined-multiline-static"
-            label="Multiline"
+            label="Comment"
             multiline
             rows="5"
             onChange={event => this.handleChange(event, 'comment')}
@@ -141,6 +150,15 @@ class RatingForm extends Component {
             variant="outlined"
             style = {{width: 300}}
           />
+          <div>
+            <Button 
+              variant="contained" 
+              className={classes.button}
+              onClick={this.handleSubmit}
+            >
+              Submit Rating
+            </Button>
+          </div>
         </div>
       </Paper>
     );

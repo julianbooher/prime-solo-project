@@ -60,6 +60,28 @@ router.get('/comments/:id', rejectUnauthenticated, (req, res) => {
   })
 });
 
+// GET ratings with params for specific fixture ratings.
+router.get('/players/:id', rejectUnauthenticated, (req, res) => {
+  console.log('req.user in fixture.get')
+  const queryText = `
+                    SELECT player.name, player.id, team.name FROM fixture
+                    JOIN team_fixture ON fixture.id = team_fixture.fixture_id
+                    JOIN team ON team.id = team_fixture.team_id
+                    JOIN player_team ON player_team.team_id = team.id
+                    JOIN player ON player.id = player_team.player_id
+                    WHERE fixture.id = $1
+                    ORDER BY team.name, player.name
+                    ;`
+  pool.query(queryText, [req.params.id])
+  .then((results) => {
+    res.send(results.rows);
+  })
+  .catch((error) => {
+    console.log('Error in fixtures.router.js GET route', error);
+    res.sendStatus(500);
+  })
+});
+
 /**
  * POST route template
  */
