@@ -1,7 +1,8 @@
 const fixtureReducer = (
     state = {
         info: {},
-        comments: []
+        comments: [],
+        players: []
     }, 
     action) => {
     switch (action.type) {
@@ -9,6 +10,8 @@ const fixtureReducer = (
             return {...state, info: action.payload};
         case 'SET_FIXTURE_COMMENTS':
             return {...state, comments: action.payload};
+        case 'SET_FIXTURE_PLAYERS':
+            return{...state, players: action.payload}
         case 'UNSET_FIXTURE_INFO':
             return {};
         default:

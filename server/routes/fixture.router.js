@@ -64,7 +64,7 @@ router.get('/comments/:id', rejectUnauthenticated, (req, res) => {
 router.get('/players/:id', rejectUnauthenticated, (req, res) => {
   console.log('req.user in fixture.get')
   const queryText = `
-                    SELECT player.name, player.id, team.name FROM fixture
+                    SELECT player.name AS player_name, player.id AS player_id, team.name AS team_name FROM fixture
                     JOIN team_fixture ON fixture.id = team_fixture.fixture_id
                     JOIN team ON team.id = team_fixture.team_id
                     JOIN player_team ON player_team.team_id = team.id

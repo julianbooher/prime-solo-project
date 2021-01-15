@@ -23,6 +23,7 @@ class FixturePage extends Component {
     console.log('in componentDidMount', this.props.match.params.id)
     this.props.dispatch({type: 'FETCH_FIXTURE_INFO', payload: this.props.match.params.id});
     this.props.dispatch({type: 'FETCH_FIXTURE_COMMENTS', payload: this.props.match.params.id});
+    this.props.dispatch({type: 'FETCH_FIXTURE_PLAYERS', payload: this.props.match.params.id});
   }
 
 
@@ -33,7 +34,7 @@ class FixturePage extends Component {
     const { comments } = this.props.store.fixtureInfo
     return (
       <div>
-        {JSON.stringify(this.props.store)}
+        {/* {JSON.stringify(this.props.store)} */}
         {/* {this.props.match.params.id} */}
         {info !== null &&
           <div className="fixture-header">

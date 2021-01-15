@@ -30,24 +30,25 @@ function* fetchFixtureComments(action) {
     console.log('api/fixture/comments get request failed', error);
   }
 }
-// // GET ROUTE
-// function* fetchFixturePlayers(action) {
-//   try {
-//     const config = {
-//       headers: { 'Content-Type': 'application/json' },
-//       withCredentials: true,
-//     };
-//     console.log('action payload', action.payload)
-//     const response = yield axios.get(`api/fixture/players/${action.payload}`, config);
-//     yield put({ type: 'SET_FIXTURE_COMMENTS', payload: response.data });
-//   } catch (error) {
-//     console.log('api/fixture/comments get request failed', error);
-//   }
-// }
+// GET ROUTE
+function* fetchFixturePlayers(action) {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+    console.log('action payload', action.payload)
+    const response = yield axios.get(`api/fixture/players/${action.payload}`, config);
+    yield put({ type: 'SET_FIXTURE_PLAYERS', payload: response.data });
+  } catch (error) {
+    console.log('api/fixture/comments get request failed', error);
+  }
+}
   
   function* fixtureInfoSaga() {
     yield takeLatest('FETCH_FIXTURE_INFO', fetchFixtureInfo);
     yield takeLatest('FETCH_FIXTURE_COMMENTS', fetchFixtureComments);
+    yield takeLatest('FETCH_FIXTURE_PLAYERS', fetchFixturePlayers);
   }
   
   export default fixtureInfoSaga;
