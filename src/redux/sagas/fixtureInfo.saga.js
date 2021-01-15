@@ -1,13 +1,14 @@
 import axios from 'axios';
 import {put, takeLatest } from 'redux-saga/effects';
 
+const config = {
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true,
+};
+
 // GET ROUTE
 function* fetchFixtureInfo(action) {
     try {
-      const config = {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      };
       console.log('action payload', action.payload)
       const response = yield axios.get(`api/fixture/info/${action.payload}`, config);
       yield put({ type: 'SET_FIXTURE_INFO', payload: response.data[0] });
@@ -19,10 +20,6 @@ function* fetchFixtureInfo(action) {
 // GET ROUTE
 function* fetchFixtureComments(action) {
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
     console.log('action payload', action.payload)
     const response = yield axios.get(`api/fixture/comments/${action.payload}`, config);
     yield put({ type: 'SET_FIXTURE_COMMENTS', payload: response.data });
@@ -33,10 +30,6 @@ function* fetchFixtureComments(action) {
 // GET ROUTE
 function* fetchFixturePlayers(action) {
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
     console.log('action payload', action.payload)
     const response = yield axios.get(`api/fixture/players/${action.payload}`, config);
     yield put({ type: 'SET_FIXTURE_PLAYERS', payload: response.data });
