@@ -43,7 +43,7 @@ class FixtureTable extends Component {
   componentDidMount = () => {
     this.props.dispatch({type: 'FETCH_FIXTURES'});
   }
-3
+
   handleChangeRowsPerPage = event => {
     this.setState({ rowsPerPage: event.target.value });
   };

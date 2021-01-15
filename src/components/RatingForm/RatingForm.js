@@ -24,7 +24,7 @@ const styles = theme => ({
     padding: theme.spacing(2),
     margin: theme.spacing(2),
     minWidth: 200,
-    maxWidth: 600,
+    maxWidth: 800,
     height: "100%"
   },
   textField: {
@@ -39,15 +39,18 @@ const styles = theme => ({
   },
 });
 
+const defaultState = {
+  home_atk_rating: 0,
+  home_df_rating: 0,
+  away_atk_rating: 0,
+  away_df_rating: 0,
+  comment: '',
+  player_id: '',
+}
+
 class RatingForm extends Component {
-  state = {
-    home_atk_rating: 0,
-    home_df_rating: 0,
-    away_atk_rating: 0,
-    away_df_rating: 0,
-    comment: '',
-    player_id: '',
-  };
+
+  state = defaultState;
 
   handleChange = (event, inputType) => { 
     this.setState({  
@@ -55,8 +58,11 @@ class RatingForm extends Component {
     })
   }
 
-  handleSubmit = () => {
-    console.log('inside handleSubmit', {...this.state, ...this.props.store.fixtureInfo.info})
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('inside handleSubmit', {...this.state, ...this.props.store.fixtureInfo.info, fixture_id: this.props.fixture_id})
+    this.props.dispatch({type:'ADD_RATING', payload: {...this.state, ...this.props.store.fixtureInfo.info, fixture_id: this.props.fixture_id}})
+    this.setState(defaultState)
   }
 
   render() {
@@ -81,6 +87,7 @@ class RatingForm extends Component {
                   onChange={event => this.handleChange(event, 'home_atk_rating')}
                   type="number"
                   className={classes.textField}
+                  InputProps={{ inputProps: { min: 0, max: 100 } }}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -96,6 +103,7 @@ class RatingForm extends Component {
                   onChange={event => this.handleChange(event, 'home_df_rating')}
                   type="number"
                   className={classes.textField}
+                  InputProps={{ inputProps: { min: 0, max: 100 } }}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -116,6 +124,7 @@ class RatingForm extends Component {
                   onChange={event => this.handleChange(event, 'away_atk_rating')}
                   type="number"
                   className={classes.textField}
+                  InputProps={{ inputProps: { min: 0, max: 100 } }}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -131,6 +140,7 @@ class RatingForm extends Component {
                   onChange={event => this.handleChange(event, 'away_df_rating')}
                   type="number"
                   className={classes.textField}
+                  InputProps={{ inputProps: { min: 0, max: 100 } }}
                   InputLabelProps={{
                     shrink: true,
                   }}
