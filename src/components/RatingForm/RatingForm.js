@@ -55,8 +55,11 @@ class RatingForm extends Component {
     })
   }
 
-  handleSubmit = () => {
-    console.log('inside handleSubmit', {...this.state, ...this.props.store.fixtureInfo.info})
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('inside handleSubmit', {...this.state, ...this.props.store.fixtureInfo.info, fixture_id: this.props.fixture_id})
+    this.props.dispatch({type:'ADD_RATING', payload: {...this.state, ...this.props.store.fixtureInfo.info, fixture_id: this.props.fixture_id}})
+
   }
 
   render() {

@@ -10,7 +10,7 @@ import {put, takeLatest } from 'redux-saga/effects';
       };
   
       yield axios.post('api/rating', action.payload, config);
-      // yield put({ type: 'FETCH_SHELF' });
+      yield put({ type: 'FETCH_FIXTURE_COMMENTS', payload: action.payload.fixture_id });
     } catch (error) {
       console.log('Shelf post request failed', error);
     }
