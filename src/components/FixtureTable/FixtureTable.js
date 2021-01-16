@@ -84,9 +84,7 @@ class FixtureTable extends Component {
           }}
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
-        />
-        
-            
+        />  
       </div>
     );
   }
