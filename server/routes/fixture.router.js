@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 // GET fixture info with params for specific fixture.
 router.get('/info/:id', rejectUnauthenticated, (req, res) => {
-  console.log('req.user in fixture.get')
+  console.log('req.user in fixture/info get')
   const queryText = `
                     SELECT fixture.date,
                       (SELECT team.name FROM team
@@ -34,23 +34,29 @@ router.get('/info/:id', rejectUnauthenticated, (req, res) => {
   })
 });
 
-// GET ratings with params for specific fixture ratings.
+// GET ratings with params for specific fixture.
 router.get('/comments/:id', rejectUnauthenticated, (req, res) => {
-  console.log('req.user in fixture.get')
+  console.log('req.user in fixture/comments get')
   const queryText = `
                     SELECT comment, player.name AS potm_name, player_of_the_match AS potm_id, "user".username,
-                    (SELECT ((atk_rating + df_rating) / 2) AS home_team_rating
-                    FROM rating_data WHERE rating.id = rating_data.rating_id 
-                    AND rating_data.home = true),
-                    (SELECT ((atk_rating + df_rating) / 2) AS away_team_rating
-                    FROM rating_data WHERE rating.id = rating_data.rating_id 
-                    AND rating_data.home = false)
+                    (SELECT atk_rating AS home_atk_rating
+                     FROM rating_data WHERE rating.id = rating_data.rating_id 
+                     AND rating_data.home = true),
+                    (SELECT df_rating AS home_df_rating
+                     FROM rating_data WHERE rating.id = rating_data.rating_id 
+                     AND rating_data.home = true),
+                    (SELECT atk_rating AS away_atk_rating
+                     FROM rating_data WHERE rating.id = rating_data.rating_id 
+                     AND rating_data.home = false),
+                    (SELECT df_rating AS away_df_rating
+                     FROM rating_data WHERE rating.id = rating_data.rating_id 
+                     AND rating_data.home = false)
                     FROM rating
                     JOIN "user" ON "user".id = rating.user_id
                     JOIN player ON rating.player_of_the_match = player.id
-                    WHERE rating.fixture_id = $1
+                    WHERE rating.fixture_id = $1 AND "user".id != $2
                     ;`
-  pool.query(queryText, [req.params.id])
+  pool.query(queryText, [req.params.id, req.user.id])
   .then((results) => {
     res.send(results.rows);
   })
@@ -60,9 +66,9 @@ router.get('/comments/:id', rejectUnauthenticated, (req, res) => {
   })
 });
 
-// GET ratings with params for specific fixture ratings.
+// GET players from a specific fixture, param for fixture id.
 router.get('/players/:id', rejectUnauthenticated, (req, res) => {
-  console.log('req.user in fixture.get')
+  console.log('req.user in fixture/players get')
   const queryText = `
                     SELECT player.name AS player_name, player.id AS player_id, team.name AS team_name FROM fixture
                     JOIN team_fixture ON fixture.id = team_fixture.fixture_id
@@ -81,6 +87,38 @@ router.get('/players/:id', rejectUnauthenticated, (req, res) => {
     res.sendStatus(500);
   })
 });
+
+// GET rating info from a particular fixture from the current user
+router.get('/currentuser/:id', rejectUnauthenticated, (req, res) => {
+  console.log('req.user in fixture/currentuser get')
+  const queryText = `
+                    SELECT comment, player_of_the_match AS potm_id,
+                      (SELECT atk_rating AS home_team_atk_rating
+                       FROM rating_data WHERE rating.id = rating_data.rating_id 
+                       AND rating_data.home = true),
+                      (SELECT df_rating AS home_team_df_rating
+                       FROM rating_data WHERE rating.id = rating_data.rating_id 
+                       AND rating_data.home = true),
+                      (SELECT atk_rating AS away_team_atk_rating
+                       FROM rating_data WHERE rating.id = rating_data.rating_id 
+                       AND rating_data.home = false),
+                      (SELECT df_rating AS away_team_df_rating
+                       FROM rating_data WHERE rating.id = rating_data.rating_id 
+                       AND rating_data.home = false)
+                  FROM rating
+                  WHERE rating.fixture_id = $1 AND rating.user_id = $2
+                  ;`
+  pool.query(queryText, [req.params.id, req.user.id])
+  .then((results) => {
+    res.send(results.rows[0]);
+  })
+  .catch((error) => {
+    console.log('Error in fixtures.router.js GET route', error);
+    res.sendStatus(500);
+  })
+});
+
+
 
 /**
  * POST route template

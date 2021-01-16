@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import './FixtureInfo.css'
 import WordBubble from '../WordBubble/WordBubble'
 import RatingForm from '../RatingForm/RatingForm'
+import RatedPage from '../RatedPage/RatedPage'
 
 
 // Material UI
@@ -17,26 +18,30 @@ const styles = theme => ({
   },
 });
 
-class FixturePage extends Component {
+class FixtureInfo extends Component {
 
   componentDidMount = () => {
     console.log('in componentDidMount', this.props.match.params.id)
     this.props.dispatch({type: 'FETCH_FIXTURE_INFO', payload: this.props.match.params.id});
-    this.props.dispatch({type: 'FETCH_FIXTURE_COMMENTS', payload: this.props.match.params.id});
-    this.props.dispatch({type: 'FETCH_FIXTURE_PLAYERS', payload: this.props.match.params.id});
   }
+
+  componentWillUnmount = () => {
+    this.props.dispatch ({ type: 'UNSET_FIXTURE_INFO'})
+  }
+
+
+
 
 
 
   render() {
     // const {classes } = this.props
-    const { info } = this.props.store.fixtureInfo
-    const { comments } = this.props.store.fixtureInfo
+    const { info, comments, userRating } = this.props.store.fixtureInfo
     return (
       <div>
         {/* {JSON.stringify(this.props.store)} */}
         {/* {this.props.match.params.id} */}
-        {info !== null &&
+        {info.home_team_id &&
           <div className="fixture-header">
             <h1><img alt={info.home_team_name} src={`https://media.api-sports.io/football/teams/${info.home_team_id}.png`}/>{info.home_team_name} vs. {info.away_team_name}<img alt={info.away_team_name} src={`https://media.api-sports.io/football/teams/${info.away_team_id}.png`}/></h1>
             <h2>{info.date}</h2>
@@ -47,17 +52,17 @@ class FixturePage extends Component {
             spacing={0}
           >
             <Grid item xs={12} sm={7}>
-              <RatingForm fixture_id={this.props.match.params.id} info={info} />
+              {Object.keys(userRating).length ?
+                <RatedPage/>
+                :
+                <RatingForm fixture_id={this.props.match.params.id} info={info} />
+              }
             </Grid>
             <Grid item xs={12} sm={5}>
-              {comments !== undefined &&
-              <>
                 {comments.map( comment => (
                   <WordBubble key={comment.username} commentInfo = {comment} info = {info} /> 
                 ))}
-              </>
-              
-              }
+
             </Grid>
           </Grid>
       </div>
@@ -66,4 +71,4 @@ class FixturePage extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(withStyles(styles)(FixturePage));
+export default connect(mapStoreToProps)(withStyles(styles)(FixtureInfo));

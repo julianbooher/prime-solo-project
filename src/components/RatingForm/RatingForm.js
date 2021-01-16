@@ -77,7 +77,9 @@ class RatingForm extends Component {
             <Grid item xs={12} sm={6}>
               <h3>{info.home_team_name}</h3>
               <br/>
+              {info.home_team_id &&
               <img alt={info.home_team_name} src={`https://media.api-sports.io/football/teams/${info.home_team_id}.png`}/>
+              }
               <div>
                 
                 <TextField
@@ -115,7 +117,9 @@ class RatingForm extends Component {
             <Grid item xs={12} sm={6}>
               <h3>{info.away_team_name}</h3>
               <br/>
-              <img alt={info.away_team_name} src={`https://media.api-sports.io/football/teams/${info.away_team_id}.png`}/>
+              {info.away_team_id &&
+                <img alt={info.away_team_name} src={`https://media.api-sports.io/football/teams/${info.away_team_id}.png`}/>
+              }
               <div>
                 <TextField
                   id="standard-number"
