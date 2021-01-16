@@ -25,6 +25,28 @@ const styles = theme => ({
 
 
 class RatedPage extends Component {  
+
+
+  state = {
+    editMode: false
+  }
+
+  handleDelete = () => {
+    console.log('inside handleDelete');
+  }
+
+  handleEdit = () => {
+    console.log('inside handleEdit');
+    this.setState({...this.props.store.fixtureInfo.userRating, editMode: true})
+    // console.log('state', this.state)
+  }
+
+  handleChange = (event, inputType) => { 
+    this.setState({  
+        [inputType]: event.target.value
+    })
+  }
+
   render() {
 
     const { classes } = this.props;
@@ -33,11 +55,14 @@ class RatedPage extends Component {
 
     return (
       <div className={classes.root}>
+        {JSON.stringify(this.state)}
         <Paper className={classes.paper}>
-          {JSON.stringify(userRating)}
+          {/* {JSON.stringify(userRating)}
           <br/>
-          {JSON.stringify(info)}
+          {JSON.stringify(info)} */}
           <div className="rated-page-paper">
+            <form>
+
             <h1>Your Rating</h1>
             <Grid container spacing={1}>
               <Grid item xs={12} sm={6}>
@@ -45,34 +70,82 @@ class RatedPage extends Component {
                 {info.home_team_id &&
                 <img alt={info.home_team_name} src={`https://media.api-sports.io/football/teams/${info.home_team_id}.png`}/>
                 }
-                <p><b>Attack Rating:</b> {userRating.home_atk_rating}</p>
-                <p><b>Defense Rating:</b> {userRating.home_df_rating}</p>
+                
+                <h4>Attack Rating</h4> 
+                {this.state.editMode ? 
+                <input 
+                type="number" 
+                value={this.state.home_atk_rating}
+                min={0}
+                max={100}
+                onChange={event => this.handleChange(event, 'home_atk_rating')}
+                />
+                :
+                <p>{userRating.home_atk_rating}</p>
+                }
+                <h4>Defense Rating</h4>
+                {this.state.editMode ? 
+                <input 
+                type="number" 
+                value={this.state.home_df_rating}
+                min={0}
+                max={100}
+                onChange={event => this.handleChange(event, 'home_df_rating')}
+                />
+                :
+                <p>{userRating.home_df_rating}</p>
+                }
               </Grid>
               <Grid item xs={12} sm={6}>
                 <h3>{info.away_team_name}</h3>
                 {info.away_team_id &&
                   <img alt={info.away_team_name} src={`https://media.api-sports.io/football/teams/${info.away_team_id}.png`}/>
                 }
-                <p><b>Attack Rating:</b> {userRating.away_atk_rating}</p>
-                <p><b>Defense Rating:</b> {userRating.away_df_rating}</p>
+                <h4>Attack Rating</h4>
+                {this.state.editMode ? 
+                <input 
+                type="number" 
+                value={this.state.away_atk_rating}
+                min={0}
+                max={100}
+                onChange={event => this.handleChange(event, 'away_atk_rating')}
+                />
+                :
+                <p>{userRating.away_atk_rating}</p>
+                }
+                
+                <h4>Defense Rating</h4>
+                {this.state.editMode ? 
+                <input 
+                type="number" 
+                value={this.state.away_df_rating}
+                min={0}
+                max={100}
+                onChange={event => this.handleChange(event, 'away_df_rating')}
+                />
+                : 
+                <p>{userRating.away_df_rating}</p>
+                }
               </Grid>
-              <Grid item xs={2}></Grid>
-              <Grid item xs={8}>
-                <h3>Comment:</h3>
-                <p>{userRating.comment}</p>
-              </Grid>
-              <Grid item xs={2}></Grid>
-
             </Grid>
-
+              <h3>Player of the Match</h3>
+              <p>{userRating.potm_name}</p>
+              <img alt={userRating.potm_name} src={`https://media.api-sports.io/football/players/${userRating.potm_id}.png`}/>
+              
+              <h3>Comment:</h3>
+              <p>{userRating.comment}</p>
+              
               <Button 
               variant="contained" 
               className={classes.button}
-              type="submit">Delete</Button>
+              onClick={this.handleDelete}
+              >Delete</Button>
               <Button 
               variant="contained" 
               className={classes.button}
-              type="submit">Edit</Button>
+              onClick={this.handleEdit}
+              >Edit</Button>
+            </form>
           </div>
         </Paper>
  
