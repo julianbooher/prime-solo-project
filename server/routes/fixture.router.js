@@ -92,20 +92,21 @@ router.get('/players/:id', rejectUnauthenticated, (req, res) => {
 router.get('/currentuser/:id', rejectUnauthenticated, (req, res) => {
   console.log('req.user in fixture/currentuser get')
   const queryText = `
-                    SELECT comment, player_of_the_match AS potm_id,
-                      (SELECT atk_rating AS home_team_atk_rating
+                    SELECT comment, player_of_the_match AS potm_id, player.name AS potm_name,
+                      (SELECT atk_rating AS home_atk_rating
                        FROM rating_data WHERE rating.id = rating_data.rating_id 
                        AND rating_data.home = true),
-                      (SELECT df_rating AS home_team_df_rating
+                      (SELECT df_rating AS home_df_rating
                        FROM rating_data WHERE rating.id = rating_data.rating_id 
                        AND rating_data.home = true),
-                      (SELECT atk_rating AS away_team_atk_rating
+                      (SELECT atk_rating AS away_atk_rating
                        FROM rating_data WHERE rating.id = rating_data.rating_id 
                        AND rating_data.home = false),
-                      (SELECT df_rating AS away_team_df_rating
+                      (SELECT df_rating AS away_df_rating
                        FROM rating_data WHERE rating.id = rating_data.rating_id 
                        AND rating_data.home = false)
                   FROM rating
+                  JOIN player ON rating.player_of_the_match = player.id
                   WHERE rating.fixture_id = $1 AND rating.user_id = $2
                   ;`
   pool.query(queryText, [req.params.id, req.user.id])

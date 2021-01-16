@@ -53,9 +53,9 @@ class FixtureInfo extends Component {
           >
             <Grid item xs={12} sm={7}>
               {Object.keys(userRating).length ?
-                <RatedPage/>
+                <RatedPage fixture_id={this.props.match.params.id} />
                 :
-                <RatingForm fixture_id={this.props.match.params.id} info={info} />
+                <RatingForm fixture_id={this.props.match.params.id}  />
               }
             </Grid>
             <Grid item xs={12} sm={5}>

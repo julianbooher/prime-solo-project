@@ -1,3 +1,16 @@
-h1{
-    text-align: center
+.rated-page-paper{
+    text-align: center;
+    display: block;
+}
+
+.rated-page-paper h3{
+    margin-bottom: 10px;
+}
+
+.rated-page-paper h4{
+    margin-bottom: 2px;
+}
+
+.rated-page-paper p{
+    margin-top: 4px;
 }
