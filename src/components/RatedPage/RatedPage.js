@@ -133,6 +133,7 @@ class RatedPage extends Component {
               <img alt={userRating.potm_name} src={`https://media.api-sports.io/football/players/${userRating.potm_id}.png`}/>
               
               <h3>Comment:</h3>
+              {}
               <p>{userRating.comment}</p>
               
               <Button 
