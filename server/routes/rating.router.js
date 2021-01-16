@@ -61,41 +61,66 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   })
 })
 
-// ------------ ROUTER FROM MOVIES SAGA TO USE THE SYNTAX OF FOR RATING SUBMIT -------------
-// router.post('/', (req, res) => {
-//   console.log(req.body);
-//   // RETURNING "id" will give us back the id of the created movie
-//   const insertMovieQuery = `
-//   INSERT INTO "movies" ("title", "poster", "description")
-//   VALUES ($1, $2, $3)
-//   RETURNING "id";`
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  console.log(req.body);
+  console.log(req.user)
+  // RETURNING "id" will give us back the id of the created rating
+  const updateRatingQuery = `
+                            UPDATE rating 
+                            SET player_of_the_match = $1, comment = $2
+                            WHERE rating.fixture_id = $3 AND rating.user_id = $4
+                            returning id
+                            ;`
 
-//   // FIRST QUERY MAKES MOVIE
-//   pool.query(insertMovieQuery, [req.body.title, req.body.poster, req.body.description])
-//   .then(result => {
-//     console.log('New Movie Id:', result.rows[0].id); //ID IS HERE!
+  // FIRST QUERY MAKES Rating
+  pool.query(updateRatingQuery, [req.body.potm_id, req.body.comment, req.params.id, req.user.id])
+  .then(result => {
+    console.log('New rating id:', result.rows[0].id); //ID IS HERE!
     
-//     const createdMovieId = result.rows[0].id
+    const updatedRatingId = result.rows[0].id
 
-//     // Depending on how you make your junction table, this insert COULD change.
-//     const insertMovieGenreQuery = `
-//       INSERT INTO "movies_genres" ("movies_id", "genres_id")
-//       VALUES  ($1, $2);
-//       `
-//       // SECOND QUERY MAKES GENRE FOR THAT NEW MOVIE
-//       pool.query(insertMovieGenreQuery, [createdMovieId, req.body.genre_id]).then(result => {
-//         //Now that both are done, send back success!
-//         res.sendStatus(201);
-//       }).catch(err => {
-//         // catch for second query
-//         console.log(err);
-//         res.sendStatus(500)
-//       })
+    // Depending on how you make your junction table, this insert COULD change.
+    const updateHomeDataQuery = `
+                                UPDATE rating_data
+                                SET atk_rating = $1, df_rating = $2
+                                WHERE rating_id = $3 AND home = true
+                                ;`
+      // SECOND QUERY MAKES GENRE FOR THAT NEW MOVIE
+      pool.query(updateHomeDataQuery,
+        [
+          req.body.home_atk_rating,
+          req.body.home_df_rating,
+          updatedRatingId,
+        ])
+      .then(result => {
+        const updateAwayDataQuery = `
+                                UPDATE rating_data
+                                SET atk_rating = $1, df_rating = $2
+                                WHERE rating_id = $3 AND home = false
+                                ;`
+      // SECOND QUERY MAKES GENRE FOR THAT NEW MOVIE
+        pool.query(updateAwayDataQuery,
+        [
+          req.body.away_atk_rating,
+          req.body.away_df_rating,
+          updatedRatingId,
+        ]).then((results) => {
+          res.sendStatus(200);
 
-// // Catch for first query
-//   }).catch(err => {
-//     console.log(err);
-//     res.sendStatus(500)
-//   })
-// })
+        }).catch((error) => {
+          console.log('error in AwayData rating.put', error);
+          res.sendStatus(500)
+        })
+      }).catch(error => {
+        // catch for second query
+        console.log('error in HomeData rating.put', error);
+        res.sendStatus(500)
+      })
+
+// Catch for first query
+  }).catch(error => {
+    console.log('error in rating table rating.put', error);
+    res.sendStatus(500)
+  })
+})
 module.exports = router;

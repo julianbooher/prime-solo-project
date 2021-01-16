@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
 
 
 
@@ -42,6 +43,16 @@ class RatedPage extends Component {
     this.setState({...this.props.store.fixtureInfo.userRating, editMode: true})
     // console.log('state', this.state)
   }
+  handleCancel = () => {
+    console.log('inside handleCancel');
+    this.setState({editMode: false})
+  }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.dispatch({type: 'UPDATE_RATING', payload:{...this.state, fixture_id: this.props.fixture_id}})
+    this.setState({editMode: false})
+    console.log('inside handleSubmit');
+  }
 
   handleChange = (event, inputType) => { 
     this.setState({  
@@ -63,7 +74,7 @@ class RatedPage extends Component {
           <br/>
           {JSON.stringify(info)} */}
           <div className="rated-page-paper">
-            <form>
+            <form onSubmit={this.handleSubmit}>
 
             <h1>Your Rating</h1>
             <Grid container spacing={1}>
@@ -131,8 +142,28 @@ class RatedPage extends Component {
               </Grid>
             </Grid>
               <h3>Player of the Match</h3>
+
+              {this.state.editMode ?
+              <Select
+              native
+              required
+              displayEmpty
+              value={this.state.potm_id}
+              onChange={(event) => this.handleChange(event, 'potm_id')}
+              >
+                {/* <option value={''}></option> */}
+              {players.map((player) => {
+                return(
+                  <option key={player.player_id} value={player.player_id}>{player.player_name} - {player.team_name}</option>
+                )
+              })}
+              </Select>
+              :
+              <>
               <p>{userRating.potm_name}</p>
               <img alt={userRating.potm_name} src={`https://media.api-sports.io/football/players/${userRating.potm_id}.png`}/>
+              </>
+              }
               
               <h3>Comment:</h3>
               {this.state.editMode ?
@@ -153,7 +184,21 @@ class RatedPage extends Component {
               :
               <p>{userRating.comment}</p>
               }
-              
+              {this.state.editMode ? 
+              <>
+              <Button 
+              variant="contained" 
+              className={classes.button}
+              type="submit"
+              >Save</Button>
+              <Button 
+              variant="contained" 
+              className={classes.button}
+              onClick={this.handleCancel}
+              >Cancel</Button>
+              </>
+              :
+              <>
               <Button 
               variant="contained" 
               className={classes.button}
@@ -164,6 +209,8 @@ class RatedPage extends Component {
               className={classes.button}
               onClick={this.handleEdit}
               >Edit</Button>
+              </>
+              }
             </form>
           </div>
         </Paper>

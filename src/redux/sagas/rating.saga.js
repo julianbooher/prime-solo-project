@@ -15,6 +15,20 @@ import {put, takeLatest } from 'redux-saga/effects';
       console.log('Shelf post request failed', error);
     }
   }
+  // PUT ROUTE
+  function* updateRating (action) {
+    try {
+      const config = {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      };
+  
+      yield axios.put(`api/rating/${action.payload.fixture_id}`, action.payload, config);
+      yield put({ type: 'FETCH_FIXTURE_COMMENTS', payload: action.payload.fixture_id });
+    } catch (error) {
+      console.log('Shelf post request failed', error);
+    }
+  }
 
   // // DELETE ROUTE
   // function* deleteItem (action) {
@@ -55,6 +69,7 @@ import {put, takeLatest } from 'redux-saga/effects';
   
   function* ratingSaga() {
     yield takeLatest('ADD_RATING', addRating);
+    yield takeLatest('UPDATE_RATING', updateRating);
   }
   
   export default ratingSaga;
