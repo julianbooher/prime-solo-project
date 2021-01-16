@@ -8,6 +8,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 
 
 
@@ -133,8 +135,24 @@ class RatedPage extends Component {
               <img alt={userRating.potm_name} src={`https://media.api-sports.io/football/players/${userRating.potm_id}.png`}/>
               
               <h3>Comment:</h3>
-              {}
+              {this.state.editMode ?
+              <div>
+                <TextField
+                id="outlined-multiline-static"
+                multiline
+                rows="5"
+                onChange={event => this.handleChange(event, 'comment')}
+                value={this.state.comment}
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+                style = {{width: 300}}
+                />
+
+              </div>
+              :
               <p>{userRating.comment}</p>
+              }
               
               <Button 
               variant="contained" 
