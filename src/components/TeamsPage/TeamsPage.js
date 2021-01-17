@@ -24,6 +24,7 @@ class TeamsPage extends Component {
   render() {
     return (
       <div className="teams-div">
+        <h1>MLS Teams</h1>
         <Grid container spacing={0}>
           {this.props.store.teams.map((team) => {
                 return(
