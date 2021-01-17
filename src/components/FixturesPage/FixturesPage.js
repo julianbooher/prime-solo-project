@@ -31,6 +31,7 @@ class FixturePage extends Component {
     this.props.dispatch({type: 'FETCH_TEAMS'})
   }
 
+  // Handles change in the dropdown menu, allowing the user to select a team and view the fixtures from that team only.
   handleChangeFor = (event) => {
     this.setState({
     teamSelected: event.target.value

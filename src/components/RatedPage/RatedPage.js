@@ -36,6 +36,7 @@ class RatedPage extends Component {
 
   handleDelete = () => {
     console.log('inside handleDelete');
+    this.props.dispatch({type:'DELETE_RATING', payload: this.props.fixture_id})
   }
 
   handleEdit = () => {
@@ -43,10 +44,12 @@ class RatedPage extends Component {
     this.setState({...this.props.store.fixtureInfo.userRating, editMode: true})
     // console.log('state', this.state)
   }
+
   handleCancel = () => {
     console.log('inside handleCancel');
     this.setState({editMode: false})
   }
+
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.dispatch({type: 'UPDATE_RATING', payload:{...this.state, fixture_id: this.props.fixture_id}})
