@@ -8,7 +8,12 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('req.user in teams.get')
-  const queryText = `SELECT id, name FROM team ORDER BY name ASC;`
+  const queryText = `
+                    SELECT team.id, team.name, team.founded, venue.id AS venue_id, venue.name as venue_name, city FROM team
+                    JOIN venue_team ON venue_team.team_id = team.id
+                    JOIN venue on venue.id = venue_team.venue_id
+                    ORDER BY name ASC
+                    ;`
   pool.query(queryText)
   .then((results) => {
     res.send(results.rows);

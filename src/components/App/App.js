@@ -21,7 +21,9 @@ import FixtureInfo from '../FixtureInfo/FixtureInfo'
 // import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import HomePage from '../HomePage/HomePage'
+import HomePage from '../HomePage/HomePage';
+import TeamsPage from '../TeamsPage/TeamsPage';
+import TeamPage from '../TeamPage/TeamPage';
 
 import './App.css';
 
@@ -70,6 +72,20 @@ class App extends Component {
               exact
               path="/fixture/:id"
               component={FixtureInfo}
+            />
+
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/teams"
+              component={TeamsPage}
+            />
+
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/team/:id"
+              component={TeamPage}
             />
             
 
