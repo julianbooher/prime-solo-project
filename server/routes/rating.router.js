@@ -61,6 +61,44 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   })
 })
 
+
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+
+  console.log(req.body);
+  console.log(req.user)
+
+  // deletes the 2 instances of rating data for a particular fixture, from a particular user.
+  const deleteRatingDataQuery = `
+                                DELETE FROM rating_data 
+                                WHERE rating_data.rating_id = (SELECT id FROM rating 
+                                WHERE rating.fixture_id = $1 AND rating.user_id = $2)
+                                ;`
+
+  pool.query(deleteRatingDataQuery, [req.params.id, req.user.id])
+  .then(result => {
+    // deletes the rating data itself
+    const deleteRatingQuery = `
+                              DELETE FROM rating 
+                              WHERE rating.fixture_id = $1 AND rating.user_id = $2
+                              ;`
+
+    pool.query(deleteRatingQuery, [req.params.id, req.user.id])
+
+    .then(result => {
+      // Send back success when 2nd is complete.
+      res.sendStatus(201);
+    }).catch(err => {
+        // catch for second query
+      console.log(err);
+      res.sendStatus(500)
+    })
+// Catch for first query
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500)
+  })
+})
+
 router.put('/:id', rejectUnauthenticated, (req, res) => {
   console.log(req.body);
   console.log(req.user)

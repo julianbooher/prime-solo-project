@@ -29,13 +29,7 @@ class FixtureInfo extends Component {
     this.props.dispatch ({ type: 'UNSET_FIXTURE_INFO'})
   }
 
-
-
-
-
-
   render() {
-    // const {classes } = this.props
     const { info, comments, userRating } = this.props.store.fixtureInfo
     return (
       <div>
@@ -51,6 +45,7 @@ class FixtureInfo extends Component {
             container 
             spacing={0}
           >
+            {/* If the user has submitted a rating, RatedPage will appear, otherwise RatingForm will appear. */}
             <Grid item xs={12} sm={7}>
               {Object.keys(userRating).length ?
                 <RatedPage fixture_id={this.props.match.params.id} />
