@@ -4,6 +4,7 @@ import user from './user.reducer';
 import fixtures from './fixtures.reducer';
 import teams from './teams.reducer'
 import fixtureInfo from './fixture.reducer';
+import team from './team.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   fixtures,
   teams,
   fixtureInfo,
+  team,
 });
 
 export default rootReducer;

@@ -14,6 +14,8 @@ const fixturesRouter = require('./routes/fixtures.router');
 const fixtureRouter = require('./routes/fixture.router');
 const teamsRouter = require('./routes/teams.router');
 const ratingRouter = require('./routes/rating.router');
+const teamRouter = require('./routes/team.router');
+const playersRouter = require('./routes/players.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -28,11 +30,12 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
-app.use('/api/fixtures', fixturesRouter)
-app.use('/api/fixture', fixtureRouter)
-app.use('/api/teams', teamsRouter)
-app.use('/api/rating', ratingRouter)
-
+app.use('/api/fixtures', fixturesRouter);
+app.use('/api/fixture', fixtureRouter);
+app.use('/api/teams', teamsRouter);
+app.use('/api/rating', ratingRouter);
+app.use('/api/team', teamRouter);
+app.use('/api/players', playersRouter);
 
 // Serve static files
 app.use(express.static('build'));

@@ -1,0 +1,19 @@
+.team-card{
+    display: block;
+}
+
+.team-card a{
+    text-decoration: none;
+}
+
+.team-card a:link{
+    color: black;
+}
+
+.team-card a:visited{
+    color: black;
+}
+
+.team-card a:hover{
+    color: blue;
+}

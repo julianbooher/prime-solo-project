@@ -3,11 +3,8 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-router.get('/', rejectUnauthenticated, (req, res) => {
-  console.log('req.user in teams.get')
+// Get players from a specific team id
+router.get('/team/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `
                     SELECT team.id, team.name, team.founded, venue.id AS venue_id, venue.name as venue_name, city FROM team
                     JOIN venue_team ON venue_team.team_id = team.id
@@ -19,18 +16,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     res.send(results.rows);
   })
   .catch((error) => {
-    console.log('Error in fixtures.router.js GET route', error);
+    console.log('Error in /players/team GET route', error);
     res.sendStatus(500);
   })
-});
-
-
-// GET route with parameters
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
 });
 
 module.exports = router;

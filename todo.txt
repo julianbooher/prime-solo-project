@@ -2,4 +2,11 @@ POTENTIAL TODOS
 ------------------
 [ ] - Add character count to text fields. 400 chars?
     [ ] - Add it to edit field as well.
+[ ] - Change Nav to be buttons instead of links potentially? Or another material ui thing?
+[ ] - Refactor fixture players reducer, saga, and get route. Put players/fixture/:id in players.router.js.
+        - This would make the organization of routes a bit more intuitive. 
 
+DEFINITE TODOS
+------------------
+[ ] - Change rate link to a rate button.
+    [ ] - Need to add withRouter to export. 
