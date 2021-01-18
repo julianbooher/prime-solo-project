@@ -27,7 +27,6 @@ class TeamCard extends Component {
   
   handleClick = () => {
     this.props.history.push(`/team/${this.props.team.id}`)
-    console.log(this.props.team.id)
   }
 
 

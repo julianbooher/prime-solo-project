@@ -31,6 +31,7 @@ const styles = theme => ({
 
 
 class FixtureTable extends Component {
+
   state = {
     page: 0,
     rowsPerPage: 5,
@@ -39,10 +40,6 @@ class FixtureTable extends Component {
   handleChangePage = (event, page) => {
     this.setState({ page });
   };
-  
-  componentDidMount = () => {
-    this.props.dispatch({type: 'FETCH_FIXTURES'});
-  }
 
   handleChangeRowsPerPage = event => {
     this.setState({ rowsPerPage: event.target.value });
@@ -51,6 +48,7 @@ class FixtureTable extends Component {
   render() {
     const { rowsPerPage, page } = this.state;
     const { classes } = this.props;
+    const { fixtures } = this.props.store;
 
 
     return (
@@ -65,7 +63,7 @@ class FixtureTable extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.store.fixtures.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(fixture=> (
+            {fixtures.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(fixture=> (
               <FixtureTableRow key={fixture.id} fixture={fixture}/>
             ))}
           </TableBody>
@@ -73,7 +71,7 @@ class FixtureTable extends Component {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={this.props.store.fixtures.length}
+          count={fixtures.length}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{

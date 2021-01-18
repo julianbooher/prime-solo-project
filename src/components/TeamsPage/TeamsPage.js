@@ -20,7 +20,6 @@ class TeamsPage extends Component {
     this.props.dispatch({type: 'FETCH_TEAMS'})
   }
 
-
   render() {
     return (
       <div className="teams-div">

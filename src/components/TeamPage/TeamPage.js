@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './TeamPage.css'
+import FixtureTable from '../FixtureTable/FixtureTable'
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -15,11 +16,18 @@ const styles = theme => ({
 
 class TeamPage extends Component {
 
+  componentDidMount = () => {
+    this.props.dispatch({type: 'FETCH_FIXTURES', payload: this.props.match.params.id})
+  }
+
 
   render() {
+
+    const {fixtures} = this.props.store
     return (
       <div>
         <h1>Team Page</h1>
+        <FixtureTable />
       </div>
 
     );
