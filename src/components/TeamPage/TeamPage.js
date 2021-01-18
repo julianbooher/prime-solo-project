@@ -6,7 +6,7 @@ import FixtureTable from '../FixtureTable/FixtureTable'
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
-// import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   root: {
@@ -25,7 +25,18 @@ class TeamPage extends Component {
     return (
       <div>
         <h1>Team Page</h1>
-        <FixtureTable />
+        <Grid 
+            container 
+            spacing={0}
+          >
+            <Grid item xs={12} sm={6}>
+              <FixtureTable />
+
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              
+            </Grid>
+          </Grid>
       </div>
 
     );
