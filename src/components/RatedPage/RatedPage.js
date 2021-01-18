@@ -41,7 +41,7 @@ class RatedPage extends Component {
 
   handleEdit = () => {
     console.log('inside handleEdit');
-    this.setState({...this.props.store.fixtureInfo.userRating, editMode: true})
+    this.setState({...this.props.store.userRating, editMode: true})
     // console.log('state', this.state)
   }
 
@@ -66,7 +66,7 @@ class RatedPage extends Component {
   render() {
 
     const { classes } = this.props;
-    const { info, players, userRating } = this.props.store.fixtureInfo
+    const { info, players, userRating } = this.props.store
 
 
     return (

@@ -24,7 +24,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 // get players from a particular team.
 router.get('/players/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `
-                    SELECT player.id AS player_id, player.name AS player_name, position 
+                    SELECT player.id, player.name, position 
                     FROM player
                     JOIN player_team ON player.id = player_team.player_id
                     WHERE player_team.team_id = $1

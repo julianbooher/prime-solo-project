@@ -26,11 +26,14 @@ class FixtureInfo extends Component {
   }
 
   componentWillUnmount = () => {
-    this.props.dispatch ({ type: 'UNSET_FIXTURE_INFO'})
+    this.props.dispatch ({ type: 'UNSET_INFO'});
+    this.props.dispatch ({ type: 'UNSET_COMMENTS'});
+    this.props.dispatch ({ type: 'UNSET_USER_RATING'});
+    this.props.dispatch ({ type: 'UNSET_PLAYERS'});
   }
 
   render() {
-    const { info, comments, userRating } = this.props.store.fixtureInfo
+    const { info, comments, userRating } = this.props.store
     return (
       <div>
         {/* {JSON.stringify(this.props.store)} */}

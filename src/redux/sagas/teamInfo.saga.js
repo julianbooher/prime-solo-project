@@ -11,7 +11,7 @@ function* fetchTeamInfo(action) {
   
       const response = yield axios.get(`api/team/${action.payload}`, config);
   
-      yield put({ type: 'SET_TEAM_INFO', payload: response.data });
+      yield put({ type: 'SET_INFO', payload: response.data });
     } catch (error) {
       console.log('teamInfo.saga.js fetchTeamInfo failed', error);
     }
@@ -27,7 +27,7 @@ function* fetchTeamPlayers(action) {
 
     const response = yield axios.get(`api/team/players/${action.payload}`, config);
 
-    yield put({ type: 'SET_TEAM_PLAYERS', payload: response.data });
+    yield put({ type: 'SET_PLAYERS', payload: response.data });
   } catch (error) {
     console.log('teamInfo.saga.js fetchTeamPlayers failed', error);
   }
