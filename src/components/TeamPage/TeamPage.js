@@ -22,8 +22,6 @@ class TeamPage extends Component {
 
 
   render() {
-
-    const {fixtures} = this.props.store
     return (
       <div>
         <h1>Team Page</h1>

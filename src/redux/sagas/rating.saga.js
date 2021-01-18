@@ -31,7 +31,7 @@ import {put, takeLatest } from 'redux-saga/effects';
     }
   }
 
-  // PUT ROUTE
+  // DELETE ROUTE
   function* deleteRating (action) {
     try {
       const config = {
