@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './TeamPage.css'
 import FixtureTable from '../FixtureTable/FixtureTable'
+import PlayerCard from '../PlayerCard/PlayerCard'
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -18,10 +19,12 @@ class TeamPage extends Component {
 
   componentDidMount = () => {
     this.props.dispatch({type: 'FETCH_FIXTURES', payload: this.props.match.params.id})
+    this.props.dispatch({type: 'FETCH_TEAM_PLAYERS', payload: this.props.match.params.id})
   }
 
 
   render() {
+    const { players } = this.props.store
     return (
       <div>
         <h1>Team Page</h1>
@@ -31,10 +34,15 @@ class TeamPage extends Component {
           >
             <Grid item xs={12} sm={6}>
               <FixtureTable />
-
             </Grid>
-            <Grid item xs={12} sm={6}>
-              
+            <Grid item container xs={12} sm={6}>
+            {players.map((player) => {
+                return(
+                  <Grid key={player.id} item xs={12} sm={4}>
+                    <PlayerCard player={player}/>
+                  </Grid>
+                )
+              })}
             </Grid>
           </Grid>
       </div>

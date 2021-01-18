@@ -60,14 +60,14 @@ class RatingForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('inside handleSubmit', {...this.state, ...this.props.store.fixtureInfo.info, fixture_id: this.props.fixture_id})
-    this.props.dispatch({type:'ADD_RATING', payload: {...this.state, ...this.props.store.fixtureInfo.info, fixture_id: this.props.fixture_id}})
+    console.log('inside handleSubmit', {...this.state, ...this.props.store.info, fixture_id: this.props.fixture_id})
+    this.props.dispatch({type:'ADD_RATING', payload: {...this.state, ...this.props.store.info, fixture_id: this.props.fixture_id}})
     this.setState(defaultState)
   }
 
   render() {
     const { classes } = this.props;
-    const { info, players } = this.props.store.fixtureInfo
+    const { info, players } = this.props.store
     return (
       <Paper className={classes.paper}>
         <h1 className="rating-title">Rating</h1>

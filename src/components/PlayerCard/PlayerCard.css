@@ -1,0 +1,20 @@
+.player-card{
+    display: block;
+    text-align: center;
+}
+
+.player-card a{
+    text-decoration: none;
+}
+
+.player-card a:link{
+    color: black;
+}
+
+.player-card a:visited{
+    color: black;
+}
+
+.player-card a:hover{
+    color: blue;
+}

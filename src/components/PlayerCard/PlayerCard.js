@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import './TeamCard.css'
+import './PlayerCard.css'
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -17,28 +17,31 @@ const styles = theme => ({
     margin: 10,
     paddingBottom: '.5em',
     paddingTop: 1,
+    minHeight: 175,
   }
 });
 
 
 
-class TeamCard extends Component {
+class PlayerCard extends Component {
   
   handleClick = () => {
-    this.props.history.push(`/team/${this.props.team.id}`)
+    // TODO - eventually takes the user to a player page.
+    // this.props.history.push(`/team/${this.props.team.id}`)
+    console.log('inside handleClick');
   }
 
 
   render() {
 
-    const { team, classes} = this.props;
+    const { player, classes} = this.props;
 
     return (
-      <div className="team-card">
+      <div className="player-card">
         <Paper onClick={this.handleClick} pt={3} pb={3} className={classes.paper}>
-            <h4>{team.name}</h4>
-            <img alt={team.name} src={`https://media.api-sports.io/football/teams/${team.id}.png`}/>
-          <p>{team.city}</p>
+            <h4>{player.name}</h4>
+            <img alt={player.name} src={`https://media.api-sports.io/football/players/${player.id}.png`}/>
+            <p>{player.position}</p>
         </Paper>
       </div>
 
@@ -46,4 +49,4 @@ class TeamCard extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(withStyles(styles)(withRouter(TeamCard)));
+export default connect(mapStoreToProps)(withStyles(styles)(withRouter(PlayerCard)));
