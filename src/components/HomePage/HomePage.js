@@ -23,6 +23,10 @@ class HomePage extends Component {
     this.props.dispatch({type: 'FETCH_FIXTURES'})
     this.props.dispatch({type: 'FETCH_HOME_COMMENTS'})
   }
+
+  componentWillUnmount = () => {
+    this.props.dispatch({type: 'UNSET_HOME_PAGE'})
+  }
   
 
   render() {
