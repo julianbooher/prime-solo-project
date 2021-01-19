@@ -6,3 +6,12 @@ img{
 .fixture-header{
     text-align: center;
 }
+
+.fixture-info-div{
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+.fixture-info-rating{
+    text-align: center;
+}

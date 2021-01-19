@@ -26,16 +26,13 @@ class FixtureInfo extends Component {
   }
 
   componentWillUnmount = () => {
-    this.props.dispatch ({ type: 'UNSET_INFO'});
-    this.props.dispatch ({ type: 'UNSET_COMMENTS'});
-    this.props.dispatch ({ type: 'UNSET_USER_RATING'});
-    this.props.dispatch ({ type: 'UNSET_PLAYERS'});
+    this.props.dispatch ({ type: 'UNSET_FIXTURE_INFO_PAGE'});
   }
 
   render() {
     const { info, comments, userRating } = this.props.store
     return (
-      <div>
+      <div className="fixture-info-div">
         {/* {JSON.stringify(this.props.store)} */}
         {/* {this.props.match.params.id} */}
         {info.home_team_id &&
@@ -49,7 +46,7 @@ class FixtureInfo extends Component {
             spacing={0}
           >
             {/* If the user has submitted a rating, RatedPage will appear, otherwise RatingForm will appear. */}
-            <Grid item xs={12} sm={7}>
+            <Grid className="fixture-info-rating" item xs={12} sm={7}>
               {Object.keys(userRating).length ?
                 <RatedPage fixture_id={this.props.match.params.id} />
                 :
@@ -57,8 +54,8 @@ class FixtureInfo extends Component {
               }
             </Grid>
             <Grid item xs={12} sm={5}>
-                {comments.map( comment => (
-                  <WordBubble key={comment.username} commentInfo = {comment} info = {info} /> 
+                {comments.map( (comment, i) => (
+                  <WordBubble key={i} comment = {comment} /> 
                 ))}
 
             </Grid>

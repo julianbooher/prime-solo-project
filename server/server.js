@@ -16,6 +16,7 @@ const teamsRouter = require('./routes/teams.router');
 const ratingRouter = require('./routes/rating.router');
 const teamRouter = require('./routes/team.router');
 const playersRouter = require('./routes/players.router');
+const commentsRouter = require('./routes/comments.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -36,6 +37,7 @@ app.use('/api/teams', teamsRouter);
 app.use('/api/rating', ratingRouter);
 app.use('/api/team', teamRouter);
 app.use('/api/players', playersRouter);
+app.use('/api/comments', commentsRouter);
 
 // Serve static files
 app.use(express.static('build'));
