@@ -2,19 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-// Basic class component structure for React with default state
-// value setup. When making a new component be sure to replace
-// the component name TemplateClass with the name for the new
-// component.
+// Material UI
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+});
+
+
 class HomePage extends Component {
-  state = {
-    heading: 'Class Component',
-  };
+  
 
   render() {
     return (
       <div>
-        <h2>{this.state.heading}</h2>
+        <FixtureTable />
       </div>
 
     );

@@ -23,6 +23,10 @@ class TeamPage extends Component {
     this.props.dispatch({type: 'FETCH_TEAM_INFO', payload: this.props.match.params.id})
   }
 
+  componentWillUnmount = () => {
+    this.props.dispatch({type: 'UNSET_TEAM_PAGE' })
+  }
+
 
   render() {
     const { players, info } = this.props.store
@@ -45,11 +49,12 @@ class TeamPage extends Component {
               <br/>
               <FixtureTable />
             </Grid>
-            <Grid className="team-player-cards" item container xs={12} sm={6}>
+            <Grid item container xs={12} sm={6}>
               <Grid item xs={12}>
                 <h1>Players</h1>
-                </Grid>
+              </Grid>
               <br/>
+              <Grid className="team-player-cards" item container xs={12}>
                 {players.map((player) => {
                     return(
                       <Grid key={player.id} item xs={12} sm={4}>
@@ -57,6 +62,7 @@ class TeamPage extends Component {
                       </Grid>
                     )
                 })}
+              </Grid>
             </Grid>
           </Grid>
       </div>

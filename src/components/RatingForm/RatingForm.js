@@ -180,7 +180,7 @@ class RatingForm extends Component {
               id: 'player-native-simple',
             }}
           >
-            <option key={0} value={''}></option>
+            <option key={'default'} value={''}></option>
             {players.map((player) => {
               return(
                 <option key={player.player_id} value={player.player_id}>{player.player_name} - {player.team_name}</option>

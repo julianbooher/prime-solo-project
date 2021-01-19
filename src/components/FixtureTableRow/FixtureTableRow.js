@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import moment from 'moment'
 
@@ -8,6 +8,7 @@ import moment from 'moment'
 import { withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
 
 // Material UI styles
 const styles = theme => ({
@@ -26,15 +27,24 @@ const styles = theme => ({
 
 class FixtureTableRow extends Component {
 
+  handleClick = () => {
+    this.props.history.push(`/fixture/${this.props.fixture.id}`)
+  }
+
   render() {
-    const { fixture } = this.props;
+    const { fixture, classes } = this.props;
     return (
       <>
       <TableRow key={fixture.id}>
         <TableCell>{moment(fixture.date).format('LL')}</TableCell>
         <TableCell>{fixture.home_team_name}</TableCell>
         <TableCell>{fixture.away_team_name}</TableCell>
-        <TableCell><Link to={`/fixture/${fixture.id}`}>Rate</Link></TableCell>
+        <TableCell>
+          <Button 
+          variant="contained" 
+          className={classes.button}
+          onClick={this.handleClick}>Discuss</Button>
+        </TableCell>
       </TableRow>
       </>
             
@@ -42,4 +52,4 @@ class FixtureTableRow extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(withStyles(styles)(FixtureTableRow));
+export default connect(mapStoreToProps)(withStyles(styles)(withRouter(FixtureTableRow)));
