@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import './HomePage.css';
 
 import FixtureTable from '../FixtureTable/FixtureTable';
 import WordBubble from '../WordBubble/WordBubble';
@@ -26,20 +27,32 @@ class HomePage extends Component {
 
   render() {
 
-    const { comments } = this.props
+    const { comments, user } = this.props.store
     return (
       <div>
+        <h1>Welcome, {user.username}</h1>
         <Grid 
           container 
           spacing={0}
         >
-          <Grid item xs={12} sm={6}>
+          <Grid item container xs={12} sm={6}>
+            <Grid item xs={12}>
+              <h1>Recent Fixtures</h1>
+            </Grid>
             <FixtureTable />
           </Grid>
           <Grid container item xs={12} sm={6}>
-            {comments.map( comment => (
-              <WordBubble key={comment.username} commentInfo = {comment} info = {info} /> 
-            ))}
+            <Grid item xs={12}>
+              <h1>Recent Comments</h1>
+            </Grid>
+            <Grid className="home-comments" item container>
+              {comments.map( (comment, i) => (
+                <Grid key={i} item xs={12}>
+                  <WordBubble key={i} comment={comment} /> 
+                </Grid>
+              ))}
+
+            </Grid>
           </Grid>
             
         </Grid>

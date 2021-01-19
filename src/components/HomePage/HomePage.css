@@ -1,0 +1,4 @@
+.home-comments{
+    overflow-y: auto;
+    max-height: 700px;
+}

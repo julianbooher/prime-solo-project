@@ -14,9 +14,25 @@ function* unsetTeamPage() {
 
     }
   }
+
+  function* unsetFixtureInfoPage() {
+    try {  
+
+      yield put({ type: 'UNSET_INFO' });
+      yield put({ type: 'UNSET_USER_RATING' });
+      yield put({ type: 'UNSET_PLAYERS' });
+      yield put({ type: 'UNSET_COMMENTS' });
+      
+    } catch (error) {
+
+      console.log('unsetFixtureInfoPage saga failed', error);
+
+    }
+  }
   
   function* unsetSaga() {
     yield takeLatest('UNSET_TEAM_PAGE', unsetTeamPage);
+    yield takeLatest('UNSET_FIXTURE_INFO_PAGE', unsetFixtureInfoPage);
   }
   
   export default unsetSaga;
