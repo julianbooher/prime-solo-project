@@ -56,8 +56,15 @@ class App extends Component {
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact
-              path="/user"
+              path="/user/:username"
               component={UserPage}
+            />  
+                      
+            <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/user/"
+            component={UserPage}
             />
 
             <ProtectedRoute

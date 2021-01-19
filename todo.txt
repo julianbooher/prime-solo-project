@@ -8,5 +8,9 @@ POTENTIAL TODOS
 
 DEFINITE TODOS
 ------------------
-[ ] - Change rate link to a rate button.
-    [ ] - Need to add withRouter to export. 
+[X] - Change rate link to a rate button.
+    [X] - Need to add withRouter to export. 
+[ ] - console.log audit, especially in server side routes and sagas, etc.
+    [ ] - sagas
+    [ ] - reducers
+    [ ] - routes
