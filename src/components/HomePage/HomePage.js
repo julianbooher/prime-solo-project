@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import FixtureTable from '../FixtureTable/FixtureTable';
+import WordBubble from '../WordBubble/WordBubble';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -19,10 +20,13 @@ class HomePage extends Component {
 
   componentDidMount = () => {
     this.props.dispatch({type: 'FETCH_FIXTURES'})
+    this.props.dispatch({type: 'FETCH_HOME_COMMENTS'})
   }
   
 
   render() {
+
+    const { comments } = this.props
     return (
       <div>
         <Grid 
@@ -33,7 +37,9 @@ class HomePage extends Component {
             <FixtureTable />
           </Grid>
           <Grid container item xs={12} sm={6}>
-            <FixtureTable />
+            {comments.map( comment => (
+              <WordBubble key={comment.username} commentInfo = {comment} info = {info} /> 
+            ))}
           </Grid>
             
         </Grid>

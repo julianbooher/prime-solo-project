@@ -8,6 +8,7 @@ import fixtureInfoSaga from './fixtureInfo.saga';
 import ratingSaga from './rating.saga';
 import teamInfo from './teamInfo.saga';
 import unsetSaga from './unset.saga';
+import homePageSaga from './homePage.saga';
 
 
 // rootSaga is the primary saga.
@@ -28,6 +29,6 @@ export default function* rootSaga() {
     ratingSaga(),
     teamInfo(),
     unsetSaga(),
-
+    homePageSaga(),
   ]);
 }
