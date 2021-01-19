@@ -19,7 +19,6 @@ function* fetchTeams() {
   
   function* teamsSaga() {
     yield takeLatest('FETCH_TEAMS', fetchTeams);
-
   }
   
   export default teamsSaga;

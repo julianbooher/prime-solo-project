@@ -18,3 +18,9 @@
 .player-card a:hover{
     color: blue;
 }
+
+.player-card img {
+    height: 100px;
+    width: auto;
+    border-radius: 25px;
+}

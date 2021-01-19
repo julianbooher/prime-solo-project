@@ -20,29 +20,49 @@ class TeamPage extends Component {
   componentDidMount = () => {
     this.props.dispatch({type: 'FETCH_FIXTURES', payload: this.props.match.params.id})
     this.props.dispatch({type: 'FETCH_TEAM_PLAYERS', payload: this.props.match.params.id})
+    this.props.dispatch({type: 'FETCH_TEAM_INFO', payload: this.props.match.params.id})
+  }
+
+  componentWillUnmount = () => {
+    this.props.dispatch({type: 'UNSET_TEAM_PAGE' })
   }
 
 
   render() {
-    const { players } = this.props.store
+    const { players, info } = this.props.store
+
     return (
       <div>
-        <h1>Team Page</h1>
+            {JSON.stringify(info)}
+        <div className="team-info">
+          <h3>{info.team_name}</h3>
+          <p>Founded: {info.founded}</p>
+          <p>{info.venue_name}</p>
+          <img alt={info.venue_name} src={`https://media.api-sports.io/football/venues/${info.venue_id}.png`}/>
+        </div>
         <Grid 
             container 
             spacing={0}
           >
             <Grid item xs={12} sm={6}>
+              <h1>Fixtures</h1>
+              <br/>
               <FixtureTable />
             </Grid>
             <Grid item container xs={12} sm={6}>
-            {players.map((player) => {
-                return(
-                  <Grid key={player.id} item xs={12} sm={4}>
-                    <PlayerCard player={player}/>
-                  </Grid>
-                )
-              })}
+              <Grid item xs={12}>
+                <h1>Players</h1>
+              </Grid>
+              <br/>
+              <Grid className="team-player-cards" item container xs={12}>
+                {players.map((player) => {
+                    return(
+                      <Grid key={player.id} item xs={12} sm={4}>
+                        <PlayerCard player={player}/>
+                      </Grid>
+                    )
+                })}
+              </Grid>
             </Grid>
           </Grid>
       </div>

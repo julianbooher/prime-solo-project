@@ -1,0 +1,17 @@
+.team-info{
+    text-align: center;
+}
+
+.team-info img {
+    height: 250px;
+    width: auto;
+}
+
+.team-player-cards{
+    overflow-y: auto;
+    max-height: 700px;
+}
+
+h1 {
+    text-align: center;
+}

@@ -17,7 +17,9 @@ const styles = theme => ({
     margin: 10,
     paddingBottom: '.5em',
     paddingTop: 1,
-    minHeight: 175,
+    minHeight: 245,
+    paddingLeft: '.5em',
+    paddingRight: '.5em',
   }
 });
 
