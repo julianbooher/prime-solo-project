@@ -1,3 +1,7 @@
 .user-title{
     text-align: center;
 }
+.user-comments{
+    overflow-y: auto;
+    max-height: 700px;
+}

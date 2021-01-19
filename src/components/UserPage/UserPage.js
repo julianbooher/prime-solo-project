@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import WordBubble from '../WordBubble/WordBubble';
+import './UserPage.css';
+
+
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -18,12 +22,17 @@ class UserPage extends Component {
 
   componentDidMount = () => {
 
+    if (this.props.match.params.username){
+      this.props.dispatch({type: 'FETCH_USER_COMMENTS', payload: this.props.match.params.username})
+    } else {
+      this.props.dispatch({type: 'FETCH_USER_COMMENTS'})
+    }
   }
 
 
   render() {
 
-    const {user} = this.props.store
+    const {user, comments} = this.props.store
 
     return (
       <div>
@@ -42,11 +51,11 @@ class UserPage extends Component {
               <h1>Recent Comments</h1>
             </Grid>
             <Grid className="user-comments" item container>
-              {/* {comments.map( (comment, i) => (
+              {comments.map( (comment, i) => (
                 <Grid key={i} item xs={12}>
                   <WordBubble key={i} comment={comment} /> 
                 </Grid>
-              ))} */}
+              ))}
 
             </Grid>
           </Grid>
