@@ -6,3 +6,8 @@
     height: 250px;
     width: auto;
 }
+
+.team-player-cards{
+    overflow-y: auto;
+    max-height: 700px;
+}

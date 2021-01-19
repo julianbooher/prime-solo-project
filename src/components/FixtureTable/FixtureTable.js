@@ -34,7 +34,7 @@ class FixtureTable extends Component {
 
   state = {
     page: 0,
-    rowsPerPage: 5,
+    rowsPerPage: 10,
   };
 
   handleChangePage = (event, page) => {
@@ -69,7 +69,7 @@ class FixtureTable extends Component {
           </TableBody>
         </Table>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 25]}
           component="div"
           count={fixtures.length}
           rowsPerPage={rowsPerPage}

@@ -29,29 +29,34 @@ class TeamPage extends Component {
 
     return (
       <div>
-        <h1>Team Page</h1>
-        {JSON.stringify(info)}
+            {JSON.stringify(info)}
+        <div className="team-info">
+          <h3>{info.team_name}</h3>
+          <p>Founded: {info.founded}</p>
+          <p>{info.venue_name}</p>
+          <img alt={info.venue_name} src={`https://media.api-sports.io/football/venues/${info.venue_id}.png`}/>
+        </div>
         <Grid 
             container 
             spacing={0}
           >
             <Grid item xs={12} sm={6}>
-            <div className="team-info">
-              <h3>{info.team_name}</h3>
-              <p>Founded: {info.founded}</p>
-              <img alt={info.venue_name} src={`https://media.api-sports.io/football/venues/${info.venue_id}.png`}/>
-            </div>
-
+              <h1>Fixtures</h1>
+              <br/>
               <FixtureTable />
             </Grid>
-            <Grid item container xs={12} sm={6}>
-            {players.map((player) => {
-                return(
-                  <Grid key={player.id} item xs={12} sm={4}>
-                    <PlayerCard player={player}/>
-                  </Grid>
-                )
-              })}
+            <Grid className="team-player-cards" item container xs={12} sm={6}>
+              <Grid item xs={12}>
+                <h1>Players</h1>
+                </Grid>
+              <br/>
+                {players.map((player) => {
+                    return(
+                      <Grid key={player.id} item xs={12} sm={4}>
+                        <PlayerCard player={player}/>
+                      </Grid>
+                    )
+                })}
             </Grid>
           </Grid>
       </div>
