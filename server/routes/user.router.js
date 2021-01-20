@@ -14,6 +14,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+router.get('/info/:username', rejectUnauthenticated, (req, res) => {
+  console.log('req.user in teams.get')
+  const queryText = `
+                    SELECT team.id, team.name, team.founded, venue.id AS venue_id, venue.name as venue_name, city FROM team
+                    JOIN venue_team ON venue_team.team_id = team.id
+                    JOIN venue on venue.id = venue_team.venue_id
+                    ORDER BY name ASC
+                    ;`
+  pool.query(queryText)
+  .then((results) => {
+    res.send(results.rows);
+  })
+  .catch((error) => {
+    console.log('Error in fixtures.router.js GET route', error);
+    res.sendStatus(500);
+  })
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted

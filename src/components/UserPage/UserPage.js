@@ -29,6 +29,10 @@ class UserPage extends Component {
     }
   }
 
+  componentWillUnmount = () => {
+    this.props.dispatch({type: 'UNMOUNT_USER_INFO'})
+  }
+
 
   render() {
 
@@ -44,6 +48,8 @@ class UserPage extends Component {
           <Grid item container xs={12} sm={6}>
             <Grid item xs={12}>
               <h1>{user.username} info</h1>
+              <p>Location: {user.location}</p>
+              <p>Favorite Team: {user.favorite_team}</p>
             </Grid>
           </Grid>
           <Grid container item xs={12} sm={6}>
