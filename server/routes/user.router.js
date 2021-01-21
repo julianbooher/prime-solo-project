@@ -23,7 +23,7 @@ router.get('/info/:username', rejectUnauthenticated, (req, res) => {
                     ;`
   pool.query(queryText)
   .then((results) => {
-    res.send(results.rows);
+    res.send(results.rows[0]);
   })
   .catch((error) => {
     console.log('Error in fixtures.router.js GET route', error);

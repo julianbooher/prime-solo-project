@@ -22,7 +22,8 @@ function* fetchUserPageComments(action) {
 
 function* fetchUserPageInfo(action) {
   try {
-    let response = yield axios.get(`api/user/info/${action.payload}`, config);
+    console.log('inside fetchUserPageInfo', action.payload)
+    const response = yield axios.get(`api/user/info/${action.payload}`, config);
     yield put({ type: 'SET_INFO', payload: response.data });  
   } catch (error) {
     console.log('error in userPage.saga.js fetchUserPageInfo', error);

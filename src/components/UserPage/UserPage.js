@@ -27,7 +27,7 @@ class UserPage extends Component {
 
     if (this.props.match.params.username){
       this.props.dispatch({type: 'FETCH_USER_COMMENTS', payload: this.props.match.params.username})
-      this.props.dispatch({type: 'FETCH_USER_INFO', payload: this.this.props.match.params.username})
+      this.props.dispatch({type: 'FETCH_USER_INFO', payload: this.props.match.params.username})
     } else {
       this.props.dispatch({type: 'FETCH_USER_COMMENTS'})
       this.props.dispatch({type: 'SET_INFO', payload: this.props.store.user})
@@ -46,7 +46,7 @@ class UserPage extends Component {
 
     return (
       <div>
-        {JSON.stringify(this.props.store.user)}
+        {JSON.stringify(info)}
         <h1 id="user-title">{info.username}</h1>
         <Grid 
           container 
