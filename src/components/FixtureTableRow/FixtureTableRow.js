@@ -34,9 +34,12 @@ class FixtureTableRow extends Component {
   }
 
   handleWinner = (team, goals, teamName) => {
+    // if (goals == null){
+    //   goals = 0;
+    // }
     if (team === 'home'){
       if (this.props.fixture.home_team_goals > this.props.fixture.away_team_goals ){
-        return <Grid container direction="row" alignItems="center">
+        return <Grid container item xs={12}>
         <Grid item>
           <b>{teamName} - {goals}</b>
         </Grid>
@@ -44,15 +47,13 @@ class FixtureTableRow extends Component {
         <ArrowLeftIcon fontSize={'small'}/>
         </Grid>
       </Grid>
-        
-        
       } else {
-        return <>{teamName} - {goals}</>
+        return <Grid item xs={12}>{teamName} - {goals}</Grid>
       }
     }
     if (team === 'away'){
       if (this.props.fixture.home_team_goals < this.props.fixture.away_team_goals ){
-        return <Grid container direction="row" alignItems="center">
+        return <Grid container item xs={12}>
         <Grid item>
           <b>{teamName} - {goals}</b>
         </Grid>
@@ -61,7 +62,7 @@ class FixtureTableRow extends Component {
         </Grid>
       </Grid>
       } else {
-        return <>{teamName} - {goals}</>
+        return <Grid item xs={12}>{teamName} - {goals}</Grid>
       }
     }
   }
@@ -73,8 +74,10 @@ class FixtureTableRow extends Component {
       <TableRow key={fixture.id}>
         <TableCell>{moment(fixture.date).format('LL')}</TableCell>
         <TableCell className="teams-cell">
+          <Grid container>
           {this.handleWinner('home', fixture.home_team_goals, fixture.home_team_name)}
           {this.handleWinner('away', fixture.away_team_goals, fixture.away_team_name)}
+          </Grid>
         </TableCell>
         {/* <TableCell> {fixture.away_team_goals} - {fixture.away_team_name}</TableCell> */}
         <TableCell>

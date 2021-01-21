@@ -31,6 +31,9 @@ const styles = theme => ({
   withoutLabel: {
     marginTop: theme.spacing(3),
   },
+  formControl: {
+    marginTop: '.5em',
+  }
 });
 
 class RegisterForm extends Component {
@@ -38,6 +41,7 @@ class RegisterForm extends Component {
     username: '',
     password: '',
     team_id: '',
+    location: '',
   };
 
   componentDidMount = () => {
@@ -70,6 +74,7 @@ class RegisterForm extends Component {
 
     return (
       <form className="formPanel" onSubmit={this.registerUser}>
+        {JSON.stringify(this.state)}
         <h2>Register User</h2>
         {this.props.store.errors.registrationMessage && (
           <h3 className="alert" role="alert">
@@ -111,16 +116,16 @@ class RegisterForm extends Component {
         </div>
         <div>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="player-native-simple">Favorite Team</InputLabel>
+            <InputLabel htmlFor="team-native-simple">Favorite Team</InputLabel>
             <Select
               native
               required
               displayEmpty
-              value={this.state.teamSelected}
-              onChange={(event) => this.handleInputChangeFor(event, 'team_id')}
+              value={this.state.team_id}
+              onChange={this.handleInputChangeFor('team_id')}
               inputProps={{
                 name: 'team_id',
-                id: 'player-native-simple',
+                id: 'team-native-simple',
               }}
             >
               <option key={'default'} value={''}></option>
@@ -131,6 +136,16 @@ class RegisterForm extends Component {
               })}
             </Select>
           </FormControl>
+        </div>
+        <div>
+          <TextField
+            id="standard-location"
+            label="Location"
+            value={this.state.location}
+            onChange={this.handleInputChangeFor('location')}
+            className={classes.textField}
+            margin="normal"
+          />
         </div>
         <div>
         <Button 

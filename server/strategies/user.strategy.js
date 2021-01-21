@@ -3,13 +3,19 @@ const LocalStrategy = require('passport-local').Strategy;
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
   pool
-    .query('SELECT * FROM "user" WHERE id = $1', [id])
+    .query(`
+    SELECT "user".username, "user".password, "user".id, "user".location, team.name AS favorite_team_name, team.id AS favorite_team_id
+    FROM "user"
+    JOIN team ON team.id = "user".favorite_team
+    WHERE "user".id = $1
+    ;`, [id])
     .then((result) => {
       // Handle Errors
       const user = result && result.rows && result.rows[0];
@@ -39,7 +45,11 @@ passport.use(
   'local',
   new LocalStrategy((username, password, done) => {
     pool
-      .query('SELECT * FROM "user" WHERE username = $1', [username])
+      .query(`SELECT "user".username, "user".password, "user".id, "user".location, team.name AS favorite_team_name, team.id AS favorite_team_id
+      FROM "user"
+      JOIN team ON team.id = "user".favorite_team
+      WHERE "user".username = $1
+      ;`, [username])
       .then((result) => {
         const user = result && result.rows && result.rows[0];
         if (user && encryptLib.comparePassword(password, user.password)) {

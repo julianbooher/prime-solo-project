@@ -55,8 +55,8 @@ class UserPage extends Component {
           <Grid item container xs={12} sm={6}>
             <Grid item xs={12}>
               <h1>{info.username} info</h1>
-              <p>Location: {info.location}</p>
-              <p>Favorite Team: {info.favorite_team}</p>
+              <p>Location: {info.location || 'None'}</p>
+              <p>Favorite Team: {info.favorite_team_name}</p>
             </Grid>
           </Grid>
           <Grid container item xs={12} sm={6}>
