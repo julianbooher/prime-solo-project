@@ -17,10 +17,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.get('/info/:username', rejectUnauthenticated, (req, res) => {
   console.log('req.user in teams.get')
   const queryText = `
-                    SELECT team.id, team.name, team.founded, venue.id AS venue_id, venue.name as venue_name, city FROM team
-                    JOIN venue_team ON venue_team.team_id = team.id
-                    JOIN venue on venue.id = venue_team.venue_id
-                    ORDER BY name ASC
+                    SELECT * FROM "user"
+                    LEFT JOIN team ON "user".favorite_team = team.id
+                    WHERE "user".username = 'julianbooher'
                     ;`
   pool.query(queryText)
   .then((results) => {

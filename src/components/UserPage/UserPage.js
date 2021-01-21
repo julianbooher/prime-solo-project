@@ -22,11 +22,17 @@ class UserPage extends Component {
 
   componentDidMount = () => {
 
+    // if there is a username in the params, get the comments from that user, otherwise get the comments for the current user.
+    // if there is a username in the params, get the user info for that user, otherwise populate the store with current user info.
+
     if (this.props.match.params.username){
       this.props.dispatch({type: 'FETCH_USER_COMMENTS', payload: this.props.match.params.username})
+      this.props.dispatch({type: 'FETCH_USER_INFO', payload: this.this.props.match.params.username})
     } else {
       this.props.dispatch({type: 'FETCH_USER_COMMENTS'})
+      this.props.dispatch({type: 'SET_INFO', payload: this.props.store.user})
     }
+  
   }
 
   componentWillUnmount = () => {
@@ -36,20 +42,21 @@ class UserPage extends Component {
 
   render() {
 
-    const {user, comments} = this.props.store
+    const {info, comments} = this.props.store
 
     return (
       <div>
-        <h1 id="user-title">{user.username}</h1>
+        {JSON.stringify(this.props.store.user)}
+        <h1 id="user-title">{info.username}</h1>
         <Grid 
           container 
           spacing={0}
         >
           <Grid item container xs={12} sm={6}>
             <Grid item xs={12}>
-              <h1>{user.username} info</h1>
-              <p>Location: {user.location}</p>
-              <p>Favorite Team: {user.favorite_team}</p>
+              <h1>{info.username} info</h1>
+              <p>Location: {info.location}</p>
+              <p>Favorite Team: {info.favorite_team}</p>
             </Grid>
           </Grid>
           <Grid container item xs={12} sm={6}>
