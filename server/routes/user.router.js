@@ -17,14 +17,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.get('/info/:username', rejectUnauthenticated, (req, res) => {
   console.log('req.user in teams.get')
   const queryText = `
-                    SELECT team.id, team.name, team.founded, venue.id AS venue_id, venue.name as venue_name, city FROM team
-                    JOIN venue_team ON venue_team.team_id = team.id
-                    JOIN venue on venue.id = venue_team.venue_id
-                    ORDER BY name ASC
+                    SELECT * FROM "user"
+                    LEFT JOIN team ON "user".favorite_team = team.id
+                    WHERE "user".username = 'julianbooher'
                     ;`
   pool.query(queryText)
   .then((results) => {
-    res.send(results.rows);
+    res.send(results.rows[0]);
   })
   .catch((error) => {
     console.log('Error in fixtures.router.js GET route', error);
@@ -39,10 +38,10 @@ router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
 
-  const queryText = `INSERT INTO "user" (username, password)
-    VALUES ($1, $2) RETURNING id`;
+  const queryText = `INSERT INTO "user" (username, password, favorite_team, location)
+    VALUES ($1, $2, $3, $4) RETURNING id`;
   pool
-    .query(queryText, [username, password])
+    .query(queryText, [username, password, req.body.team_id, req.body.location])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);
