@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import FixtureTable from '../FixtureTable/FixtureTable'
+import './FixturesPage.css';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -10,6 +11,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -45,10 +49,9 @@ class FixturePage extends Component {
 }
 
   render() {
-    const {classes } = this.props
+    const { classes } = this.props
     return (
-      <div className={classes.root}>
-        {JSON.stringify(this.state)}
+      <div className={`${classes.root} fixtures-page-div `}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="team-native-simple">Team</InputLabel>
           <Select

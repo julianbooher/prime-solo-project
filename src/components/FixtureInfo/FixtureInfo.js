@@ -5,6 +5,7 @@ import './FixtureInfo.css'
 import WordBubble from '../WordBubble/WordBubble'
 import RatingForm from '../RatingForm/RatingForm'
 import RatedPage from '../RatedPage/RatedPage'
+import moment from 'moment'
 
 
 // Material UI
@@ -38,7 +39,7 @@ class FixtureInfo extends Component {
         {info.home_team_id &&
           <div className="fixture-header">
             <h1><img alt={info.home_team_name} src={`https://media.api-sports.io/football/teams/${info.home_team_id}.png`}/>{info.home_team_name} vs. {info.away_team_name}<img alt={info.away_team_name} src={`https://media.api-sports.io/football/teams/${info.away_team_id}.png`}/></h1>
-            <h2>{info.date}</h2>
+            <h2>{moment(info.date).format('LL')}</h2>
           </div>
         }
         <Grid 

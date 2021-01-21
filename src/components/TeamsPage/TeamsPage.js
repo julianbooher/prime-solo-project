@@ -27,7 +27,7 @@ class TeamsPage extends Component {
         <Grid container spacing={0}>
           {this.props.store.teams.map((team) => {
                 return(
-                  <Grid key={team.id} item xs={12} sm={3}>
+                  <Grid key={team.id} item xs={12} sm={2}>
                     <TeamCard team={team}/>
                   </Grid>
                 )

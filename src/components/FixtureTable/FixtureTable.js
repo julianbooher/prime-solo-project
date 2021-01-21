@@ -14,6 +14,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
+// import { Block } from '@material-ui/icons';
 
 // Material UI styles
 const styles = theme => ({
@@ -53,12 +54,12 @@ class FixtureTable extends Component {
 
     return (
       <div>
+        {/* {JSON.stringify(fixtures)} */}
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-            <TableCell>Fixture Date</TableCell>
-            <TableCell>Home Team</TableCell>
-            <TableCell>Away Team</TableCell>
+            <TableCell>Date</TableCell>
+            <TableCell>Teams</TableCell>
             <TableCell></TableCell>
             </TableRow>
           </TableHead>
