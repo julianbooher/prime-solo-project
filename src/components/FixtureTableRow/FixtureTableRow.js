@@ -34,9 +34,9 @@ class FixtureTableRow extends Component {
   }
 
   handleWinner = (team, goals, teamName) => {
-    // if (goals == null){
-    //   goals = 0;
-    // }
+    if (goals == null){
+      return <Grid item xs={12}>{teamName} - {`COVID`}</Grid>;
+    }
     if (team === 'home'){
       if (this.props.fixture.home_team_goals > this.props.fixture.away_team_goals ){
         return <Grid container item xs={12}>
@@ -54,7 +54,7 @@ class FixtureTableRow extends Component {
     if (team === 'away'){
       if (this.props.fixture.home_team_goals < this.props.fixture.away_team_goals ){
         return <Grid container item xs={12}>
-        <Grid item>
+        <Grid item >
           <b>{teamName} - {goals}</b>
         </Grid>
         <Grid item>
@@ -74,7 +74,7 @@ class FixtureTableRow extends Component {
       <TableRow key={fixture.id}>
         <TableCell>{moment(fixture.date).format('LL')}</TableCell>
         <TableCell className="teams-cell">
-          <Grid container>
+          <Grid container item xs={12}>
           {this.handleWinner('home', fixture.home_team_goals, fixture.home_team_name)}
           {this.handleWinner('away', fixture.away_team_goals, fixture.away_team_name)}
           </Grid>
