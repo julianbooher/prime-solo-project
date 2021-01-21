@@ -2,21 +2,54 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+// Material UI
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Select from '@material-ui/core/Select';
+
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing(1),
+    marginTop: "2em",
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginTop: 0,
+    width: 200,
+  },
+  withoutLabel: {
+    marginTop: theme.spacing(3),
+  },
+});
+
 class RegisterForm extends Component {
   state = {
     username: '',
     password: '',
+    team_id: '',
   };
+
+  componentDidMount = () => {
+    this.props.dispatch({type: 'FETCH_TEAMS'})
+  }
 
   registerUser = (event) => {
     event.preventDefault();
 
     this.props.dispatch({
       type: 'REGISTER',
-      payload: {
-        username: this.state.username,
-        password: this.state.password,
-      },
+      payload: this.state
     });
   }; // end registerUser
 
@@ -26,7 +59,15 @@ class RegisterForm extends Component {
     });
   };
 
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
+
   render() {
+
+    const { classes } = this.props;
+    const { teams } = this.props.store;
+
     return (
       <form className="formPanel" onSubmit={this.registerUser}>
         <h2>Register User</h2>
@@ -36,35 +77,74 @@ class RegisterForm extends Component {
           </h3>
         )}
         <div>
-          <label htmlFor="username">
-            Username:
-            <input
-              type="text"
-              name="username"
-              value={this.state.username}
-              required
-              onChange={this.handleInputChangeFor('username')}
-            />
-          </label>
+          <TextField
+            required
+            id="standard-name"
+            label="Username"
+            value={this.state.username}
+            onChange={this.handleInputChangeFor('username')}
+            className={classes.textField}
+            margin="normal"
+          />
         </div>
         <div>
-          <label htmlFor="password">
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              required
-              onChange={this.handleInputChangeFor('password')}
-            />
-          </label>
+          <FormControl className={classNames(classes.margin, classes.textField)}>
+          <InputLabel htmlFor="adornment-password">Password</InputLabel>
+          <Input
+            required
+            id="adornment-password"
+            type={this.state.showPassword ? 'text' : 'password'}
+            value={this.state.password}
+            onChange={this.handleInputChangeFor('password')}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="Toggle password visibility"
+                  onClick={this.handleClickShowPassword}
+                >
+                  {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
         </div>
         <div>
-          <input className="btn" type="submit" name="submit" value="Register" />
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="player-native-simple">Favorite Team</InputLabel>
+            <Select
+              native
+              required
+              displayEmpty
+              value={this.state.teamSelected}
+              onChange={(event) => this.handleInputChangeFor(event, 'team_id')}
+              inputProps={{
+                name: 'team_id',
+                id: 'player-native-simple',
+              }}
+            >
+              <option key={'default'} value={''}></option>
+              {teams.map((team) => {
+                return(
+                  <option key={team.id} value={team.id}>{team.name}</option>
+                )
+              })}
+            </Select>
+          </FormControl>
+        </div>
+        <div>
+        <Button 
+              variant="contained"
+              color="primary" 
+              className={classes.button}
+              type="submit"
+            >
+              Register
+            </Button>
         </div>
       </form>
     );
   }
 }
 
-export default connect(mapStoreToProps)(RegisterForm);
+export default connect(mapStoreToProps)(withStyles(styles)(RegisterForm));

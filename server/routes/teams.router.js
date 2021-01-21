@@ -6,7 +6,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * GET route template
  */
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/', (req, res) => {
   console.log('req.user in teams.get')
   const queryText = `
                     SELECT team.id, team.name, team.founded, venue.id AS venue_id, venue.name as venue_name, city FROM team
