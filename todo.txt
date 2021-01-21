@@ -14,3 +14,8 @@ DEFINITE TODOS
     [ ] - sagas
     [ ] - reducers
     [ ] - routes
+[ ] - change get route for fixtures to get team id's
+    [ ] - fixtures page route 
+    [ ] - team page route 
+[ ] - make all divs of comments scrollable
+    [ ] - fixture page 

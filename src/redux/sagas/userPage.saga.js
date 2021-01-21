@@ -19,6 +19,22 @@ function* fetchUserPageComments(action) {
     console.log('error in homePage.saga.js fetchUserPageComments', error);
   }
 }
+
+function* fetchUserPageInfo(action) {
+  try {
+    let response
+    if (action.payload){
+      response = yield axios.get(`api/comments/user/${action.payload}`, config);
+    } else {
+      response = yield axios.get(`api/comments/user`, config);
+    }
+    yield put({ type: 'SET_INFO', payload: response.data });  
+  } catch (error) {
+    console.log('error in homePage.saga.js fetchUserPageComments', error);
+  }
+}
+
+
   
 function* userPageSaga() {
   yield takeLatest('FETCH_USER_COMMENTS', fetchUserPageComments);

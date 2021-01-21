@@ -33,7 +33,7 @@ class HomePage extends Component {
 
     const { comments, user } = this.props.store
     return (
-      <div>
+      <div className="home-page-div">
         <h1>Welcome, {user.username}</h1>
         <Grid 
           container 
