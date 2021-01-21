@@ -12,3 +12,15 @@
 .rating-info p {
     margin: .25em;
 }
+
+.rating-info a {
+    text-decoration: none;
+}
+
+.rating-info a:visited {
+    color: black;
+}
+
+.rating-info a:hover {
+    color: blue;
+}
