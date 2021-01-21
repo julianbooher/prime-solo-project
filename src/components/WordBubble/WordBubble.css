@@ -2,17 +2,13 @@
     margin-bottom: .5em;
     margin-top: .5em;
 }
-.potm{
-    text-align: center;
-}
-.username{
-    text-align: center;
-    margin: .5em;
 
-}
-.home-team{
+.rating-info{
+    display: block;
     text-align: center;
+    /* border-right: 1px solid gray; */
 }
-.away-team{
-    text-align: center;
+
+.rating-info p {
+    margin: .25em;
 }
