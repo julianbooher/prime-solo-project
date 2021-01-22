@@ -36,7 +36,7 @@ class UserPage extends Component {
   }
 
   componentWillUnmount = () => {
-    this.props.dispatch({type: 'UNMOUNT_USER_INFO'})
+    this.props.dispatch({type: 'UNSET_USER_INFO'})
   }
 
 
@@ -46,7 +46,7 @@ class UserPage extends Component {
 
     return (
       <div>
-        {JSON.stringify(info)}
+        {/* {JSON.stringify(info)} */}
         <h1 id="user-title">{info.username}</h1>
         <Grid 
           container 

@@ -43,10 +43,23 @@ function* unsetFixtureInfoPage() {
   }
 }
   
+function* unsetUserInfoPage() {
+  try {  
+
+    yield put({ type: 'UNSET_INFO' });  
+    yield put({ type: 'UNSET_COMMENTS' });
+      
+  } catch (error) {
+
+    console.log('unsetUserInfoPage saga failed', error);
+
+  }
+}
 function* unsetSaga() {
   yield takeLatest('UNSET_TEAM_PAGE', unsetTeamPage);
   yield takeLatest('UNSET_FIXTURE_INFO_PAGE', unsetFixtureInfoPage);
   yield takeLatest('UNSET_HOME_PAGE', unsetHomePage);
+  yield takeLatest('UNSET_USER_INFO', unsetUserInfoPage);
 }
   
 export default unsetSaga;

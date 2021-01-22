@@ -71,7 +71,7 @@ class RatedPage extends Component {
 
     return (
       <div className={classes.root}>
-        {JSON.stringify(this.state)}
+        {/* {JSON.stringify(this.state)} */}
         <Paper className={classes.paper}>
           {/* {JSON.stringify(userRating)}
           <br/>
