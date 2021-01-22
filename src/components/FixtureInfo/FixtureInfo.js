@@ -34,11 +34,23 @@ class FixtureInfo extends Component {
     const { info, comments, userRating } = this.props.store
     return (
       <div className="fixture-info-div">
-        {/* {JSON.stringify(this.props.store)} */}
+        {/* {JSON.stringify(info)} */}
         {/* {this.props.match.params.id} */}
         {info.home_team_id &&
           <div className="fixture-header">
-            <h1><img alt={info.home_team_name} src={`https://media.api-sports.io/football/teams/${info.home_team_id}.png`}/>{info.home_team_name} vs. {info.away_team_name}<img alt={info.away_team_name} src={`https://media.api-sports.io/football/teams/${info.away_team_id}.png`}/></h1>
+            <h1>
+              <img 
+                className="fixture-info-header-img" 
+                alt={info.home_team_name} 
+                src={`https://media.api-sports.io/football/teams/${info.home_team_id}.png`}/>
+              {info.home_team_name} {info.home_team_goals} 
+              - 
+              {info.away_team_goals} {info.away_team_name}
+              <img 
+                className="fixture-info-header-img" 
+                alt={info.away_team_name} 
+                src={`https://media.api-sports.io/football/teams/${info.away_team_id}.png`}/>
+            </h1>
             <h2>{moment(info.date).format('LL')}</h2>
           </div>
         }

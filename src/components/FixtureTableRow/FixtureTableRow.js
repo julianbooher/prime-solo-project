@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import moment from 'moment'
+import moment from 'moment';
+import './FixtureTableRow.css';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -34,35 +35,65 @@ class FixtureTableRow extends Component {
   }
 
   handleWinner = (team, goals, teamName) => {
-    // if (goals == null){
-    //   goals = 0;
-    // }
+    const {fixture} = this.props;
+
+    if (goals == null){
+      return <Grid item xs={12}>{teamName} - {`COVID`}</Grid>;
+    }
     if (team === 'home'){
-      if (this.props.fixture.home_team_goals > this.props.fixture.away_team_goals ){
+      if (fixture.home_team_goals > fixture.away_team_goals ){
         return <Grid container item xs={12}>
-        <Grid item>
-          <b>{teamName} - {goals}</b>
-        </Grid>
-        <Grid item>
-        <ArrowLeftIcon fontSize={'small'}/>
-        </Grid>
-      </Grid>
+                <Link to ={`/team/${fixture.away_team_id}`}>
+                  <Grid item >
+                      <img 
+                        className="fixture-table-crest"
+                        alt={fixture.home_team_name} 
+                        src={`https://media.api-sports.io/football/teams/${fixture.home_team_id}.png`}/>
+                        <b>{teamName} - {goals}</b>
+                  </Grid>
+                </Link>
+                <Grid item>
+                <ArrowLeftIcon fontSize={'small'}/>
+                </Grid>
+              </Grid>
       } else {
-        return <Grid item xs={12}>{teamName} - {goals}</Grid>
+        return <Grid item xs={12}>
+                <Link to ={`/team/${fixture.home_team_id}`}>
+                  <img 
+                    className="fixture-table-crest"
+                    alt={fixture.home_team_name} 
+                    src={`https://media.api-sports.io/football/teams/${fixture.home_team_id}.png`}/>
+                  {teamName} - {goals}
+                </Link>
+              </Grid>
       }
     }
     if (team === 'away'){
-      if (this.props.fixture.home_team_goals < this.props.fixture.away_team_goals ){
+      if (fixture.home_team_goals < fixture.away_team_goals ){
         return <Grid container item xs={12}>
-        <Grid item>
-          <b>{teamName} - {goals}</b>
-        </Grid>
-        <Grid item>
-        <ArrowLeftIcon fontSize={'small'}/>
-        </Grid>
-      </Grid>
+                <Link to ={`/team/${fixture.away_team_id}`}>
+                  <Grid item >
+                      <img 
+                        className="fixture-table-crest"
+                        alt={fixture.away_team_name} 
+                        src={`https://media.api-sports.io/football/teams/${fixture.away_team_id}.png`}/>
+                        <b>{teamName} - {goals}</b>
+                  </Grid>
+                </Link>
+                <Grid item>
+                  <ArrowLeftIcon fontSize={'small'}/>
+                </Grid>
+              </Grid>
       } else {
-        return <Grid item xs={12}>{teamName} - {goals}</Grid>
+        return <Grid item xs={12}>
+                <Link to ={`/team/${fixture.away_team_id}`}>
+                    <img 
+                      className="fixture-table-crest"
+                      alt={fixture.away_team_name} 
+                      src={`https://media.api-sports.io/football/teams/${fixture.away_team_id}.png`}/>
+                    {teamName} - {goals}
+                  </Link>      
+                </Grid>
       }
     }
   }
@@ -74,7 +105,7 @@ class FixtureTableRow extends Component {
       <TableRow key={fixture.id}>
         <TableCell>{moment(fixture.date).format('LL')}</TableCell>
         <TableCell className="teams-cell">
-          <Grid container>
+          <Grid container item xs={12}>
           {this.handleWinner('home', fixture.home_team_goals, fixture.home_team_name)}
           {this.handleWinner('away', fixture.away_team_goals, fixture.away_team_name)}
           </Grid>

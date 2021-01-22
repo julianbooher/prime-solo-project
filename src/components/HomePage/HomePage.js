@@ -35,6 +35,7 @@ class HomePage extends Component {
     return (
       <div className="home-page-div">
         <h1>Welcome, {user.username}</h1>
+        {/* {JSON.stringify(comments)} */}
         <Grid 
           container 
           spacing={0}

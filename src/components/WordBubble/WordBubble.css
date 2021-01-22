@@ -2,17 +2,40 @@
     margin-bottom: .5em;
     margin-top: .5em;
 }
-.potm{
-    text-align: center;
-}
-.username{
-    text-align: center;
-    margin: .5em;
 
-}
-.home-team{
+.rating-info{
+    display: block;
     text-align: center;
+    /* border-right: 1px solid gray; */
 }
-.away-team{
-    text-align: center;
+
+.rating-info p {
+    margin: .25em;
+}
+
+.rating-info a {
+    text-decoration: none;
+}
+
+.rating-info a:visited {
+    color: black;
+}
+
+.rating-info a:hover {
+    color: blue;
+}
+
+.word-bubble-crest{
+    height: 16px;
+    width: auto;
+    margin-right: .4em;
+}
+
+.word-bubble-ratings{
+    margin-bottom: .4em !important;
+    font-size: 15px;
+}
+
+.word-bubble-team{
+    font-size: 18px;
 }

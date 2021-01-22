@@ -74,7 +74,6 @@ class RegisterForm extends Component {
 
     return (
       <form className="formPanel" onSubmit={this.registerUser}>
-        {JSON.stringify(this.state)}
         <h2>Register User</h2>
         {this.props.store.errors.registrationMessage && (
           <h3 className="alert" role="alert">

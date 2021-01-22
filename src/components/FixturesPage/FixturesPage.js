@@ -52,27 +52,27 @@ class FixturePage extends Component {
     const { classes } = this.props
     return (
       <div className={`${classes.root} fixtures-page-div `}>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="team-native-simple">Team</InputLabel>
-          <Select
-            native
-            value={this.state.teamSelected}
-            onChange={(event) => this.handleChangeFor(event)}
-            inputProps={{
-              name: 'team_id',
-              id: 'team-native-simple',
-            }}
-          >
-            <option value={0}>All</option>
-            {this.props.store.teams.map((team) => {
-              return(
-                <option key={team.id} value={team.id}>{team.name}</option>
-              )
-            })}
-          </Select>
-        </FormControl>
         <div>
           <h1>Fixtures</h1>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="team-native-simple">Team</InputLabel>
+            <Select
+              native
+              value={this.state.teamSelected}
+              onChange={(event) => this.handleChangeFor(event)}
+              inputProps={{
+                name: 'team_id',
+                id: 'team-native-simple',
+              }}
+            >
+              <option value={0}>All</option>
+              {this.props.store.teams.map((team) => {
+                return(
+                  <option key={team.id} value={team.id}>{team.name}</option>
+                )
+              })}
+            </Select>
+          </FormControl>
         </div>
         <div>
           <FixtureTable />

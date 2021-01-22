@@ -1,0 +1,18 @@
+.teams-cell a {
+    text-decoration: none;
+    color: black;
+}
+
+.teams-cell a:visited {
+    color: black;
+}
+
+.teams-cell a:hover {
+    color: blue;
+}
+
+.fixture-table-crest{
+    height: 14px;
+    width: auto;
+    margin-right: .4em;
+}

@@ -8,22 +8,25 @@ router.get('/info/:id', rejectUnauthenticated, (req, res) => {
   console.log('req.user in fixture/info get')
   const queryText = `
                     SELECT fixture.date,
-                      (SELECT team.name FROM team
-                       JOIN team_fixture ON team.id = team_fixture.team_id 
-                       WHERE team_fixture.home=true AND fixture.id=fixture_id) AS home_team_name,
-                      (SELECT team.id FROM team
-                       JOIN team_fixture ON team.id = team_fixture.team_id 
-                       WHERE team_fixture.home=true AND fixture.id=fixture_id) AS home_team_id,
-                      (SELECT team.name FROM team
-                       JOIN team_fixture ON team.id = team_fixture.team_id 
-                       WHERE team_fixture.home=false AND fixture.id=fixture_id) AS away_team_name,
-                      (SELECT team.id FROM team
-                       JOIN team_fixture ON team.id = team_fixture.team_id 
-                       WHERE team_fixture.home=false AND fixture.id=fixture_id) AS away_team_id
-                    FROM fixture
-                    WHERE fixture.id = $1
-                    GROUP BY fixture.id
-                    ;`
+                    (SELECT team.name FROM team
+                     JOIN team_fixture ON team.id = team_fixture.team_id 
+                     WHERE team_fixture.home=true AND fixture.id=fixture_id) AS home_team_name,
+                    (SELECT team.id FROM team
+                     JOIN team_fixture ON team.id = team_fixture.team_id 
+                     WHERE team_fixture.home=true AND fixture.id=fixture_id) AS home_team_id,
+                    (SELECT team_fixture.goals FROM team_fixture
+                     WHERE team_fixture.home=true AND fixture.id=fixture_id) AS home_team_goals,
+                    (SELECT team.name FROM team
+                     JOIN team_fixture ON team.id = team_fixture.team_id 
+                     WHERE team_fixture.home=false AND fixture.id=fixture_id) AS away_team_name,
+                    (SELECT team.id FROM team
+                     JOIN team_fixture ON team.id = team_fixture.team_id 
+                     WHERE team_fixture.home=false AND fixture.id=fixture_id) AS away_team_id,
+                    (SELECT team_fixture.goals FROM team_fixture
+                     WHERE team_fixture.home=false AND fixture.id=fixture_id) AS away_team_goals                 
+                  FROM fixture
+                  WHERE fixture.id = $1
+                  GROUP BY fixture.id;`
   pool.query(queryText, [req.params.id])
   .then((results) => {
     res.send(results.rows);
