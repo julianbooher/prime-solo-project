@@ -36,6 +36,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                   FROM rating
                   JOIN "user" ON "user".id = rating.user_id
                   JOIN player ON rating.player_of_the_match = player.id
+                  ORDER BY rating.id DESC
                   ;`
   pool.query(queryText)
   .then((results) => {

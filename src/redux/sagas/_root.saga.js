@@ -10,6 +10,7 @@ import teamInfo from './teamInfo.saga';
 import unsetSaga from './unset.saga';
 import homePageSaga from './homePage.saga';
 import userPageSaga from './userPage.saga';
+import statisticsSaga from './statistics.saga';
 
 
 // rootSaga is the primary saga.
@@ -32,5 +33,6 @@ export default function* rootSaga() {
     unsetSaga(),
     homePageSaga(),
     userPageSaga(),
+    statisticsSaga(),
   ]);
 }

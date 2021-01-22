@@ -7,6 +7,7 @@ import comments from './comments.reducer';
 import info from './info.reducer';
 import players from './players.reducer';
 import userRating from './userRating.reducer';
+import statistics from './statistics.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   info,
   players,
   userRating,
+  statistics,
 });
 
 export default rootReducer;

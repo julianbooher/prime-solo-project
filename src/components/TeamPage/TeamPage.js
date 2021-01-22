@@ -28,16 +28,17 @@ class TeamPage extends Component {
   }
 
   handleClick = (id) => {
-    console.log('inside handleClick', id)
+    console.log('inside handleClick', id);
+    this.props.dispatch({type: 'FETCH_PLAYER_STATISTICS', payload: id});
   }
 
 
   render() {
-    const { players, info } = this.props.store
+    const { players, info, statistics } = this.props.store
 
     return (
       <div>
-            {/* {JSON.stringify(info)} */}
+            {JSON.stringify(statistics)}
         <div className="team-info">
           <h3>{info.team_name}</h3>
           <p>Founded: {info.founded}</p>
