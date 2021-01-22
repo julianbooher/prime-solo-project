@@ -24,3 +24,18 @@
 .rating-info a:hover {
     color: blue;
 }
+
+.word-bubble-crest{
+    height: 16px;
+    width: auto;
+    margin-right: .4em;
+}
+
+.word-bubble-ratings{
+    margin-bottom: .4em !important;
+    font-size: 15px;
+}
+
+.word-bubble-team{
+    font-size: 18px;
+}

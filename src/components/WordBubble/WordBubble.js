@@ -42,13 +42,25 @@ class WordBubbles extends Component {
                     <h3>{comment.username}</h3>
                   </Link>
                   <Link to={`/team/${comment.home_team_id}`}>
-                    <p className="rating home-team">{comment.home_team_name}</p>
+                    <p className="word-bubble-team">
+                      <img 
+                        className="word-bubble-crest"
+                        alt={comment.home_team_name} 
+                        src={`https://media.api-sports.io/football/teams/${comment.home_team_id}.png`}/>
+                      {comment.home_team_name}
+                    </p>
                   </Link> 
-                  <p><b>ATK:</b> {comment.home_atk_rating} <b>DEF:</b>  {comment.home_df_rating}</p>
+                  <p className="word-bubble-ratings"><b>ATK:</b> {comment.home_atk_rating} <b>DEF:</b>  {comment.home_df_rating}</p>
                   <Link to={`/team/${comment.away_team_id}`}>
-                    <p className="rating away-team">{comment.away_team_name}</p>
+                    <p className="word-bubble-team">
+                      <img 
+                        className="word-bubble-crest"
+                        alt={comment.home_team_name} 
+                        src={`https://media.api-sports.io/football/teams/${comment.away_team_id}.png`}/>
+                      {comment.away_team_name}
+                    </p>
                   </Link> 
-                  <p><b>ATK:</b>  {comment.away_atk_rating} <b>DEF:</b>  {comment.away_df_rating}</p>
+                  <p className="word-bubble-ratings"><b>ATK:</b>  {comment.away_atk_rating} <b>DEF:</b>  {comment.away_df_rating}</p>
                   <p className="rating-potm">POTM:</p>
                   <p>{comment.potm_name}</p>
                 </Grid>
