@@ -5,3 +5,12 @@
     overflow-y: auto;
     max-height: 700px;
 }
+
+.user-info{
+    text-align: center;
+}
+
+.user-info-crest{
+    height: 14px;
+    width: auto;
+}

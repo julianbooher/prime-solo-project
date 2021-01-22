@@ -82,6 +82,8 @@ class Nav extends Component {
             <Button color="inherit" onClick={event => this.goSomewhere('home')}>
               <h2>Match Thread</h2>
             </Button>
+            <div className="nav-bar-right">
+
               {this.props.store.user.id ? 
                 <>
                 {this.state.width < 800 ? 
@@ -125,6 +127,7 @@ class Nav extends Component {
                  :
                  <Button color="inherit" onClick={event => this.goSomewhere('login')}>Login/Register</Button>
                 }
+            </div>
           </Toolbar>
         </AppBar>
         {/* {JSON.stringify(this.state.width)} */}

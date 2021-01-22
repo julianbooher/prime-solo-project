@@ -27,13 +27,17 @@ class TeamPage extends Component {
     this.props.dispatch({type: 'UNSET_TEAM_PAGE' })
   }
 
+  handleClick = (id) => {
+    console.log('inside handleClick', id)
+  }
+
 
   render() {
     const { players, info } = this.props.store
 
     return (
       <div>
-            {JSON.stringify(info)}
+            {/* {JSON.stringify(info)} */}
         <div className="team-info">
           <h3>{info.team_name}</h3>
           <p>Founded: {info.founded}</p>
@@ -58,7 +62,7 @@ class TeamPage extends Component {
                 {players.map((player) => {
                     return(
                       <Grid key={player.id} item xs={12} sm={4}>
-                        <PlayerCard player={player}/>
+                        <PlayerCard handleClick={event => this.handleClick(player.id)} player={player}/>
                       </Grid>
                     )
                 })}
