@@ -1,3 +1,7 @@
 .MuiButton-label{
   text-transform: none;
 }
+
+.nav-bar-right{
+  margin-left: auto;
+}
