@@ -23,12 +23,12 @@ function* fetchPlayerStatistics(action) {
                birthPlace: `${player.birth.place}, ${player.birth.country}`,
                nationality: player.nationality,
                position: statistics[0].games.position,
-               appearences: statistics[0].games.appearences,
+               appearances: statistics[0].games.appearences,
                minutes: statistics[0].games.minutes,
                totalShots: statistics[0].shots.total,
                shotsOnTarget: statistics[0].shots.on,
                goals: statistics[0].goals.total,
-               assists: statistics[0].goals.assits,
+               assists: statistics[0].goals.assists,
                passes: statistics[0].passes.total,
                keyPasses: statistics[0].passes.key,
                tackles: statistics[0].tackles.total,
@@ -38,7 +38,6 @@ function* fetchPlayerStatistics(action) {
                dribbles: statistics[0].dribbles.success,
                foulsCommitted: statistics[0].fouls.committed,
                foulsDrawn: statistics[0].fouls.drawn
-
            } 
         });
     } catch (error) {

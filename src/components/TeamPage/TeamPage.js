@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import './TeamPage.css'
-import FixtureTable from '../FixtureTable/FixtureTable'
-import PlayerCard from '../PlayerCard/PlayerCard'
+import './TeamPage.css';
+import FixtureTable from '../FixtureTable/FixtureTable';
+import PlayerCard from '../PlayerCard/PlayerCard';
+import PlayerStats from '../PlayerStats/PlayerStats';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Modal from '@material-ui/core/Modal';
+
 
 const styles = theme => ({
   root: {
@@ -16,6 +19,10 @@ const styles = theme => ({
 });
 
 class TeamPage extends Component {
+
+  state = {
+    open: false,
+  }
 
   componentDidMount = () => {
     this.props.dispatch({type: 'FETCH_FIXTURES', payload: this.props.match.params.id})
@@ -29,12 +36,20 @@ class TeamPage extends Component {
 
   handleClick = (id) => {
     console.log('inside handleClick', id);
+    this.setState({
+      open: true
+    })
     this.props.dispatch({type: 'FETCH_PLAYER_STATISTICS', payload: id});
+  }
+  handleClose = () => {
+    this.setState({open: false})
+    this.props.dispatch({type: 'UNSET_STATISTICS'})
   }
 
 
   render() {
-    const { players, info, statistics } = this.props.store
+    
+    const { players, info, statistics } = this.props.store;
 
     return (
       <div>
@@ -45,6 +60,14 @@ class TeamPage extends Component {
           <p>{info.venue_name}</p>
           <img alt={info.venue_name} src={`https://media.api-sports.io/football/venues/${info.venue_id}.png`}/>
         </div>
+        <Modal
+          // aria-labelledby="simple-modal-title"
+          // aria-describedby="simple-modal-description"
+          open={this.state.open}
+          onClose={this.handleClose}
+        >
+          <PlayerStats />
+        </Modal>
         <Grid 
             container 
             spacing={0}
