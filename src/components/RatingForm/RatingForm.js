@@ -70,7 +70,9 @@ class RatingForm extends Component {
     const { info, players } = this.props.store
     return (
       <Paper className={classes.paper}>
-        <h1 className="rating-title">Rating</h1>
+        <h2 className="rating-title">Rating</h2>
+        <div className="section-title-border"></div>
+        
         <div className="rating-fields-div">
           <form onSubmit={this.handleSubmit}>
           <Grid container spacing={1}>
@@ -158,13 +160,13 @@ class RatingForm extends Component {
             id="outlined-multiline-static"
             label="Comment"
             multiline
-            rows="5"
+            rows="6"
             onChange={event => this.handleChange(event, 'comment')}
             value={this.state.comment}
             className={classes.textField}
             margin="normal"
             variant="outlined"
-            style = {{width: 300}}
+            style = {{width: 400}}
           />
           <div>
         <FormControl className={classes.formControl}>

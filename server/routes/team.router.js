@@ -6,7 +6,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 // get info for a particular team, including venue information.
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `
-                    SELECT team.name AS team_name, founded, venue.name AS venue_name, venue.id AS venue_id, venue.city AS city FROM team
+                    SELECT team.name AS team_name, team.id AS team_id, founded, venue.name AS venue_name, venue.id AS venue_id, venue.city AS city FROM team
                     JOIN venue_team ON venue_team.team_id = team.id
                     JOIN venue ON venue.id = venue_team.venue_id
                     WHERE team.id = $1

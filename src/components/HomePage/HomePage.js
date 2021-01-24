@@ -34,7 +34,7 @@ class HomePage extends Component {
     const { comments, user } = this.props.store
     return (
       <div className="home-page-div">
-        <h3>Welcome {user.username}!</h3>
+        <h2>Welcome {user.username}!</h2>
         {/* {JSON.stringify(comments)} */}
         <Grid 
           container 

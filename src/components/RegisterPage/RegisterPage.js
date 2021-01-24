@@ -34,7 +34,7 @@ class RegisterPage extends Component {
             color="inherit"
             className={classes.button}
             onClick={() => {
-              this.props.history.push('/registration');
+              this.props.history.push('/login');
             }}
           >
             Login

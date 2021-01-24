@@ -80,6 +80,7 @@ class RatedPage extends Component {
             <form onSubmit={this.handleSubmit}>
 
             <h1>Your Rating</h1>
+            <div className="section-title-border"></div>
             <Grid container spacing={1}>
               <Grid item xs={12} sm={6}>
                 <h3>{info.home_team_name}</h3>
