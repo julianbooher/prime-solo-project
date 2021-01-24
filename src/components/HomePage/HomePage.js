@@ -34,7 +34,7 @@ class HomePage extends Component {
     const { comments, user } = this.props.store
     return (
       <div className="home-page-div">
-        <h1>Welcome, {user.username}</h1>
+        <h3>Welcome {user.username}!</h3>
         {/* {JSON.stringify(comments)} */}
         <Grid 
           container 
@@ -42,13 +42,15 @@ class HomePage extends Component {
         >
           <Grid item container xs={12} sm={6}>
             <Grid item xs={12}>
-              <h1>Recent Fixtures</h1>
+              <h3>Recent Fixtures</h3>
+              <div className="section-title-border"></div>
             </Grid>
             <FixtureTable />
           </Grid>
           <Grid container item xs={12} sm={6}>
             <Grid item xs={12}>
-              <h1>Recent Comments</h1>
+              <h3>Recent Comments</h3>
+              <div className="section-title-border"></div>
             </Grid>
             <Grid className="home-comments" item container>
               {comments.map( (comment, i) => (

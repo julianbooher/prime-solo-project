@@ -30,5 +30,6 @@ SUNDAY TODOS
     [ ] - Teams Page
     [ ] - Team Page 
     [ ] - User Page
+[ ] - Finish importing players from api, pages 32+
 [ ] - Update readme.
 [ ] - Deploy Heroku?
