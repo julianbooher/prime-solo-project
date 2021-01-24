@@ -38,12 +38,17 @@ class FixtureTableRow extends Component {
     const {fixture} = this.props;
 
     if (goals == null){
-      return <Grid item xs={12}><Link to={`/team/${fixture.away_team_id}`}>{teamName}</Link>- {`POSTPONED`}</Grid>;
+      return <Grid item xs={12}>
+        <Link to={`/team/${fixture.away_team_id}`}>
+        <img 
+          className="fixture-table-crest"
+          alt={fixture.home_team_name} 
+          src={`https://media.api-sports.io/football/teams/${teamId}.png`}/>{teamName}</Link>- {`POSTPONED`}</Grid>;
     }
     if (team === 'home'){
       if (fixture.home_team_goals > fixture.away_team_goals ){
         return <Grid container item xs={12}>
-                <Link to ={`/team/${fixture.away_team_id}`}>
+                <Link to ={`/team/${fixture.home_team_id}`}>
                   <Grid item >
                       <img 
                         className="fixture-table-crest"
