@@ -28,6 +28,7 @@ router.get('/players/:id', rejectUnauthenticated, (req, res) => {
                     FROM player
                     JOIN player_team ON player.id = player_team.player_id
                     WHERE player_team.team_id = $1
+                    ORDER BY player.name ASC
                         ;`
     pool.query(queryText, [req.params.id])
     .then((results) => {

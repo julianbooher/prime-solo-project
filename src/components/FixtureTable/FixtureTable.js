@@ -56,13 +56,6 @@ class FixtureTable extends Component {
       <div>
         {/* {JSON.stringify(fixtures)} */}
         <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Teams</TableCell>
-            <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
           <TableBody>
             {fixtures.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(fixture=> (
               <FixtureTableRow key={fixture.id} fixture={fixture}/>

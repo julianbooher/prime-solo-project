@@ -7,3 +7,15 @@
     margin-left: 2.5%;
     margin-right: 2.5%;
 }
+
+.home-page-div h3{
+    text-align: center;
+    margin-bottom: .1em;
+}
+
+.section-title-border{
+    width: 40%;
+    border-bottom: 1px solid gray;
+    margin: auto;
+    margin-bottom: 2em;
+}

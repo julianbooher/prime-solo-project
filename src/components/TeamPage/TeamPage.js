@@ -25,15 +25,26 @@ class TeamPage extends Component {
   }
 
   componentDidMount = () => {
+    // Get info for the individual team when the component mounts.
     this.props.dispatch({type: 'FETCH_FIXTURES', payload: this.props.match.params.id})
     this.props.dispatch({type: 'FETCH_TEAM_PLAYERS', payload: this.props.match.params.id})
     this.props.dispatch({type: 'FETCH_TEAM_INFO', payload: this.props.match.params.id})
+  }
+
+  componentDidUpdate = (prevProps) => {
+    // if clause prevents infinite loop, allows the user to click on a different team name on the same url path to go to a different team page.
+    if (prevProps.location.pathname !== this.props.location.pathname){
+      this.props.dispatch({type: 'FETCH_FIXTURES', payload: this.props.match.params.id})
+      this.props.dispatch({type: 'FETCH_TEAM_PLAYERS', payload: this.props.match.params.id})
+      this.props.dispatch({type: 'FETCH_TEAM_INFO', payload: this.props.match.params.id})
+    }
   }
 
   componentWillUnmount = () => {
     this.props.dispatch({type: 'UNSET_TEAM_PAGE' })
   }
 
+  // handles the modal opening for player statistics.
   handleClick = (id) => {
     console.log('inside handleClick', id);
     this.setState({
@@ -41,6 +52,7 @@ class TeamPage extends Component {
     })
     this.props.dispatch({type: 'FETCH_PLAYER_STATISTICS', payload: id});
   }
+  // closing the modal
   handleClose = () => {
     this.setState({open: false})
     this.props.dispatch({type: 'UNSET_STATISTICS'})
@@ -49,11 +61,10 @@ class TeamPage extends Component {
 
   render() {
 
-    const { players, info, statistics } = this.props.store;
+    const { players, info } = this.props.store;
 
     return (
       <div>
-            {/* {JSON.stringify(statistics)} */}
         <div className="team-info">
           <h3>{info.team_name}</h3>
           <p>Founded: {info.founded}</p>
@@ -61,8 +72,6 @@ class TeamPage extends Component {
           <img alt={info.venue_name} src={`https://media.api-sports.io/football/venues/${info.venue_id}.png`}/>
         </div>
         <Modal
-          // aria-labelledby="simple-modal-title"
-          // aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={this.handleClose}
         >

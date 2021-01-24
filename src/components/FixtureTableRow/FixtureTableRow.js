@@ -34,16 +34,21 @@ class FixtureTableRow extends Component {
     this.props.history.push(`/fixture/${this.props.fixture.id}`)
   }
 
-  handleWinner = (team, goals, teamName) => {
+  handleWinner = (team, goals, teamName, teamId) => {
     const {fixture} = this.props;
 
     if (goals == null){
-      return <Grid item xs={12}>{teamName} - {`POSTPONED`}</Grid>;
+      return <Grid item xs={12}>
+        <Link to={`/team/${fixture.away_team_id}`}>
+        <img 
+          className="fixture-table-crest"
+          alt={fixture.home_team_name} 
+          src={`https://media.api-sports.io/football/teams/${teamId}.png`}/>{teamName}</Link>- {`POSTPONED`}</Grid>;
     }
     if (team === 'home'){
       if (fixture.home_team_goals > fixture.away_team_goals ){
         return <Grid container item xs={12}>
-                <Link to ={`/team/${fixture.away_team_id}`}>
+                <Link to ={`/team/${fixture.home_team_id}`}>
                   <Grid item >
                       <img 
                         className="fixture-table-crest"
@@ -106,8 +111,8 @@ class FixtureTableRow extends Component {
         <TableCell>{moment(fixture.date).format('LL')}</TableCell>
         <TableCell className="teams-cell">
           <Grid container item xs={12}>
-          {this.handleWinner('home', fixture.home_team_goals, fixture.home_team_name)}
-          {this.handleWinner('away', fixture.away_team_goals, fixture.away_team_name)}
+          {this.handleWinner('home', fixture.home_team_goals, fixture.home_team_name, fixture.home_team_id)}
+          {this.handleWinner('away', fixture.away_team_goals, fixture.away_team_name, fixture.away_team_id)}
           </Grid>
         </TableCell>
         {/* <TableCell> {fixture.away_team_goals} - {fixture.away_team_name}</TableCell> */}

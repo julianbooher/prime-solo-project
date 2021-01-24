@@ -35,8 +35,8 @@ class TeamCard extends Component {
     const { team, classes} = this.props;
 
     return (
-      <div className="team-card">
-        <Paper onClick={this.handleClick} pt={3} pb={3} className={classes.paper}>
+      <div>
+        <Paper onClick={this.handleClick} pt={3} pb={3} className={`${classes.paper} team-card`}>
             <h4>{team.name}</h4>
             <img alt={team.name} src={`https://media.api-sports.io/football/teams/${team.id}.png`}/>
           <p>{team.city}</p>

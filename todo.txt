@@ -19,3 +19,17 @@ DEFINITE TODOS
     [X] - team page route 
 [X] - make all divs of comments scrollable
     [X] - fixture page 
+
+
+SUNDAY TODOS
+-----------------
+[ ] - Change all headers, probably new font for them.
+    [ ] - Home Page
+    [ ] - Fixtures Page
+    [ ] - Fixture Page
+    [ ] - Teams Page
+    [ ] - Team Page 
+    [ ] - User Page
+[ ] - Finish importing players from api, pages 32+
+[ ] - Update readme.
+[ ] - Deploy Heroku?
