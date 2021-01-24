@@ -2,6 +2,10 @@
     display: block;
 }
 
+.team-card:hover{
+    background-color: rgba(177, 177, 177, 0.767);
+}
+
 .team-card a{
     text-decoration: none;
 }
