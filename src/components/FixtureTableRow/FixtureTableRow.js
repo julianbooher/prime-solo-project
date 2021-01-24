@@ -38,7 +38,7 @@ class FixtureTableRow extends Component {
     const {fixture} = this.props;
 
     if (goals == null){
-      return <Grid item xs={12}>{teamName} - {`COVID`}</Grid>;
+      return <Grid item xs={12}>{teamName} - {`POSTPONED`}</Grid>;
     }
     if (team === 'home'){
       if (fixture.home_team_goals > fixture.away_team_goals ){

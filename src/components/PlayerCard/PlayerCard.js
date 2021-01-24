@@ -39,8 +39,8 @@ class PlayerCard extends Component {
     const { player, classes} = this.props;
 
     return (
-      <div className="player-card">
-        <Paper onClick={this.props.handleClick} pt={3} pb={3} className={classes.paper}>
+      <div>
+        <Paper onClick={this.props.handleClick} pt={3} pb={3} className={`${classes.paper} player-card`}>
             <h4>{player.name}</h4>
             <img alt={player.name} src={`https://media.api-sports.io/football/players/${player.id}.png`}/>
             <p>{player.position}</p>

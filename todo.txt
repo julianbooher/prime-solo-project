@@ -14,8 +14,8 @@ DEFINITE TODOS
     [ ] - sagas
     [ ] - reducers
     [ ] - routes
-[ ] - change get route for fixtures to get team id's
-    [ ] - fixtures page route 
-    [ ] - team page route 
-[ ] - make all divs of comments scrollable
-    [ ] - fixture page 
+[X] - change get route for fixtures to get team id's
+    [X] - fixtures page route 
+    [X] - team page route 
+[X] - make all divs of comments scrollable
+    [X] - fixture page 

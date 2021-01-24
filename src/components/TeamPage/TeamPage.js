@@ -48,12 +48,12 @@ class TeamPage extends Component {
 
 
   render() {
-    
+
     const { players, info, statistics } = this.props.store;
 
     return (
       <div>
-            {JSON.stringify(statistics)}
+            {/* {JSON.stringify(statistics)} */}
         <div className="team-info">
           <h3>{info.team_name}</h3>
           <p>Founded: {info.founded}</p>
