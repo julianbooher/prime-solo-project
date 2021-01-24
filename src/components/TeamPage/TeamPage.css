@@ -15,3 +15,9 @@
 h1 {
     text-align: center;
 }
+
+.stats-modal-div{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}

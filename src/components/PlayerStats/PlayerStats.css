@@ -1,0 +1,28 @@
+#modal-title{
+    text-align: center;
+}
+
+th td{
+    padding: 0;
+}
+
+.stats-modal-table{
+    text-align: center;
+}
+
+#simple-modal-description p {
+    margin-top: .1em;
+    margin-bottom: .1em;
+    text-align: center;
+}
+
+#stats-modal-table-header{
+    margin-top: .5em;
+    margin-bottom: .5em;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#modal-title{
+    margin-bottom: .5em;
+}
