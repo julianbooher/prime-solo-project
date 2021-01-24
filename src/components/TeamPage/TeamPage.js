@@ -49,11 +49,10 @@ class TeamPage extends Component {
 
   render() {
 
-    const { players, info, statistics } = this.props.store;
+    const { players, info } = this.props.store;
 
     return (
       <div>
-            {/* {JSON.stringify(statistics)} */}
         <div className="team-info">
           <h3>{info.team_name}</h3>
           <p>Founded: {info.founded}</p>
@@ -61,8 +60,6 @@ class TeamPage extends Component {
           <img alt={info.venue_name} src={`https://media.api-sports.io/football/venues/${info.venue_id}.png`}/>
         </div>
         <Modal
-          // aria-labelledby="simple-modal-title"
-          // aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={this.handleClose}
         >

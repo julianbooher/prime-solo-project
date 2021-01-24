@@ -4,7 +4,7 @@
 }
 
 .player-card:hover{
-    background-color: rgb(207, 207, 193);
+    background-color: rgba(177, 177, 177, 0.767);
 }
 
 .player-card a{
