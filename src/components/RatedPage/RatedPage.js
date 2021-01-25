@@ -181,7 +181,7 @@ class RatedPage extends Component {
                 className={classes.textField}
                 margin="normal"
                 variant="outlined"
-                style = {{width: 300}}
+                style = {{width: 400}}
                 />
 
               </div>
