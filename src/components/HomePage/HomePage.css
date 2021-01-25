@@ -12,9 +12,13 @@
     text-align: center;
     margin-bottom: .1em;
 }
+.home-page-div h2{
+    text-align: center;
+    margin-bottom: 1em;
+}
 
 .section-title-border{
-    width: 40%;
+    width: 30%;
     border-bottom: 1px solid gray;
     margin: auto;
     margin-bottom: 2em;

@@ -65,12 +65,19 @@ class TeamPage extends Component {
 
     return (
       <div>
-        <div className="team-info">
-          <h3>{info.team_name}</h3>
-          <p>Founded: {info.founded}</p>
-          <p>{info.venue_name}</p>
-          <img alt={info.venue_name} src={`https://media.api-sports.io/football/venues/${info.venue_id}.png`}/>
-        </div>
+        <Grid container spacing={0} className="team-info">
+          <Grid item xs={12} sm={6}>
+            <h1>{info.team_name}</h1>
+            <img className="team-info-crest" alt={info.team_name} src={`https://media.api-sports.io/football/teams/${info.team_id}.png`}/>
+            <p>Founded: {info.founded}</p>
+          </Grid>
+          {/* {JSON.stringify(info)} */}
+          <Grid item xs={12} sm={6}>
+            <h2>Venue</h2>
+            <p>{info.venue_name}</p>
+            <img alt={info.venue_name} src={`https://media.api-sports.io/football/venues/${info.venue_id}.png`}/>
+          </Grid>
+        </Grid>
         <Modal
           open={this.state.open}
           onClose={this.handleClose}
@@ -82,13 +89,15 @@ class TeamPage extends Component {
             spacing={0}
           >
             <Grid item xs={12} sm={6}>
-              <h1>Fixtures</h1>
+              <h3>Fixtures</h3>
+              <div className="section-title-border"></div>
               <br/>
               <FixtureTable />
             </Grid>
             <Grid item container xs={12} sm={6}>
               <Grid item xs={12}>
-                <h1>Players</h1>
+                <h3>Players</h3>
+                <div className="section-title-border"></div>
               </Grid>
               <br/>
               <Grid className="team-player-cards" item container xs={12}>

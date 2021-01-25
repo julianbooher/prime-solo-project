@@ -54,14 +54,14 @@ class UserPage extends Component {
         >
           <Grid item container xs={12} sm={6}>
             <Grid item xs={12} className="user-info">
-              <h1>{info.username} info</h1>
+              <h2>{info.username} info</h2>
               <p>Location: {info.location || 'None'}</p>
               <p>Favorite Team: <img className="user-info-crest" alt={info.favorite_team_name} src={`https://media.api-sports.io/football/teams/${info.favorite_team_id}.png`}/> {info.favorite_team_name}</p>
             </Grid>
           </Grid>
           <Grid container item xs={12} sm={6}>
             <Grid item xs={12}>
-              <h1>Recent Comments</h1>
+              <h2 id="user-comments-title">Recent Comments</h2>
             </Grid>
             <Grid className="user-comments" item container>
               {comments.map( (comment, i) => (

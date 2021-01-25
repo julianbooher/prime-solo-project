@@ -67,6 +67,8 @@ class FixtureInfo extends Component {
               }
             </Grid>
             <Grid item xs={12} sm={5}>
+              <h2 id="fixture-info-commentary-title">Commentary</h2>
+              <div className="section-title-border"></div>
                 {comments.map( (comment, i) => (
                   <WordBubble key={i} comment = {comment} /> 
                 ))}
